@@ -6,84 +6,53 @@
     <title>Portal Rządowy Państwa Polandria</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-main: #f4f6f8; --bg-dark: #0f172a; --primary: #1e3a5f; --primary-light: #2c5282;
-            --accent: #d4af37; --text-dark: #1a202c; --text-muted: #64748b; --white: #ffffff;
-            --success: #38a169; --warning: #d69e2e; --danger: #e53e3e; --info: #3182ce;
-        }
+        :root { --bg-main: #f4f6f8; --bg-dark: #0f172a; --primary: #1e3a5f; --primary-light: #2c5282; --accent: #d4af37; --text-dark: #1a202c; --text-muted: #64748b; --white: #ffffff; --success: #38a169; --warning: #d69e2e; --danger: #e53e3e; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-dark); }
-        
         .top-bar { background-color: var(--bg-dark); color: var(--white); padding: 5px 20px; font-size: 0.8rem; display: flex; justify-content: space-between; }
         .top-bar a { color: var(--accent); text-decoration: none; margin-left: 15px; }
-
         header { background-color: var(--white); border-bottom: 3px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 15px; cursor: pointer; }
         .logo-icon { font-size: 2.5rem; }
         .logo-text h1 { font-family: 'Merriweather', serif; color: var(--primary); font-size: 1.5rem; line-height: 1; }
         .logo-text span { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-        
-        nav ul { list-style: none; display: flex; gap: 5px; }
-        nav ul li a { text-decoration: none; color: var(--primary); padding: 10px 15px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
+        nav ul { list-style: none; display: flex; gap: 5px; flex-wrap: wrap; }
+        nav ul li a { text-decoration: none; color: var(--primary); padding: 10px 15px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: 0.2s; display: inline-block; }
         nav ul li a:hover, nav ul li a.active { background-color: var(--primary); color: var(--white); }
-
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
         .card { background: var(--white); border-radius: 8px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; border-top: 4px solid var(--primary); }
-        .card-gold { border-top-color: var(--accent); }
-        
         h2 { color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--bg-main); padding-bottom: 10px; }
         h3 { color: var(--text-dark); margin-bottom: 10px; }
-
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; color: var(--primary); }
         input[type="text"], input[type="number"], input[type="password"], select, textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 4px; font-size: 1rem; }
         input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1); }
-        .checkbox-group { display: flex; align-items: center; gap: 10px; }
-        .checkbox-group input { width: auto; }
-
-        .btn { padding: 10px 20px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; transition: 0.2s; text-decoration: none; display: inline-block; text-align: center; }
+        .btn { padding: 10px 20px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-block; text-align: center; }
         .btn-primary { background-color: var(--primary); color: var(--white); }
-        .btn-primary:hover { background-color: var(--primary-light); }
-        .btn-sm { padding: 5px 10px; font-size: 0.8rem; }
+        .btn-sm { padding: 5px 10px; font-size: 0.8rem; margin: 2px; }
         .btn-danger { background-color: var(--danger); color: white; }
         .btn-success { background-color: var(--success); color: white; }
         .btn-warning { background-color: var(--warning); color: white; }
         .btn-full { width: 100%; }
-
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
         .stat-box { background: var(--primary); color: white; padding: 20px; border-radius: 8px; text-align: center; }
         .stat-box h4 { font-size: 2rem; margin-bottom: 5px; color: var(--accent); }
-        .stat-box p { font-size: 0.9rem; opacity: 0.9; }
-
-        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; display: inline-block; margin-bottom: 5px; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
         .badge-pending { background-color: #fefcbf; color: #975a16; }
-        .badge-processing { background-color: #bee3f8; color: #2a4365; }
         .badge-accepted { background-color: #c6f6d5; color: #22543d; }
         .badge-rejected { background-color: #fed7d7; color: #822727; }
-        .badge-danger { background-color: #fed7d7; color: #822727; }
-
         .service-item { border: 1px solid #e2e8f0; padding: 15px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;}
-        .service-item:hover { border-color: var(--primary); background: #f7fafc; }
         .fine-item { border-left: 4px solid var(--danger); padding: 10px; margin-bottom: 10px; background: #fff5f5; border-radius: 4px;}
-
         .hidden { display: none !important; }
-        .alert { padding: 15px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9rem; }
-        .alert-info { background: #ebf8ff; color: #2b6cb0; border-left: 4px solid #3182ce; }
-
+        .alert { padding: 15px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9rem; background: #ebf8ff; color: #2b6cb0; border-left: 4px solid #3182ce; }
         .tab-bar { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; flex-wrap: wrap; }
         .tab-btn { background: none; border: none; padding: 10px 15px; cursor: pointer; font-weight: 600; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; }
         .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
-
-        /* MODAL WNIOSKU */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: white; padding: 30px; border-radius: 8px; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; border-top: 5px solid var(--primary); }
-        .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
-
+        .data-box { background: #f8fafc; padding: 10px; border-radius: 4px; margin: 5px 0; font-size: 0.9rem; color: var(--text-muted); }
         footer { background: var(--bg-dark); color: var(--white); text-align: center; padding: 20px; margin-top: 40px; font-size: 0.85rem; }
     </style>
-
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com https://www.gstatic.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://www.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:;">
 </head>
 <body>
@@ -92,8 +61,6 @@
         <span>Oficjalny Portal Rządowy</span>
         <div>
             <span>gov.polandria.pl</span>
-            <a href="#" onclick="navigate('help')">Pomoc</a>
-            <a href="#" onclick="navigate('contact')">Kontakt</a>
             <a href="#" onclick="navigate('admin')" style="color:var(--warning);">Dla Urzędników</a>
         </div>
     </div>
@@ -102,10 +69,7 @@
         <div class="header-inner">
             <div class="logo" onclick="navigate('home')">
                 <div class="logo-icon">🦅</div>
-                <div class="logo-text">
-                    <h1>POLANDRIA</h1>
-                    <span>Urząd Cyfrowy Państwa</span>
-                </div>
+                <div class="logo-text"><h1>POLANDRIA</h1><span>Urząd Cyfrowy Państwa</span></div>
             </div>
             <nav>
                 <ul id="main-nav">
@@ -122,122 +86,125 @@
 
     <div class="container">
         
+        <!-- STRONA GŁÓWNA -->
         <div id="page-home" class="page">
-            <div class="alert alert-info"><strong>„Wszystkie sprawy państwowe w jednym miejscu.”</strong><br>Witaj na portalu cyfrowym Państwa Polandria.</div>
+            <div class="alert"><strong>„Wszystkie sprawy państwowe w jednym miejscu.”</strong><br>Witaj na portalu cyfrowym Państwa Polandria.</div>
             <div class="stats-grid">
                 <div class="stat-box"><h4 id="stat-citizens">0</h4><p>Mieszkańców</p></div>
-                <div class="stat-box"><h4 id="stat-companies">0</h4><p>Zarejestrowanych Firm</p></div>
+                <div class="stat-box"><h4 id="stat-companies">0</h4><p>Zatwierdzonych Firm</p></div>
                 <div class="stat-box"><h4 id="stat-apps">0</h4><p>Wniosków w toku</p></div>
-                <div class="stat-box"><h4 id="stat-fines">0</h4><p>Wystawionych Mandatów</p></div>
             </div>
-            <div class="grid-3">
-                <div class="card"><h3>Aktualności</h3><p style="font-size: 0.9rem;">Uruchomiono nowy moduł wystawiania mandatów karnych oraz rejestracji firm.</p></div>
-                <div class="card card-gold"><h3>Szybkie Usługi</h3><div style="display:flex; gap:5px; flex-wrap:wrap;"><button class="btn btn-primary btn-sm" onclick="openAppModal('Wniosek o obywatelstwo', 'Obywatelskie', [])">Obywatelstwo</button><button class="btn btn-primary btn-sm" onclick="openAppModal('Rejestracja firmy', 'Gospodarcze', [{id:'companyName', label:'Nazwa firmy'}, {id:'companyAddress', label:'Adres siedziby'}, {id:'companyType', label:'Branża'}])">Załóż Firmę</button><button class="btn btn-primary btn-sm" onclick="openAppModal('Wniosek o nadanie adresu', 'Mieszkaniowe', [{id:'street', label:'Ulica'}, {id:'bldNum', label:'Numer budynku'}, {id:'city', label:'Miasto'}])">Nadaj Adres</button></div></div>
-                <div class="card"><h3>Komunikaty</h3><p style="font-size: 0.9rem;">Zmiana regulaminu portalu wchodzi w życie od dzisiaj.</p></div>
+            <div class="card" style="margin-top:20px;">
+                <h2>Aktualne Ustawy Państwowe</h2>
+                <div id="home-laws-list" style="color:var(--text-muted);">Brak ustaw w systemie.</div>
             </div>
         </div>
 
+        <!-- LOGOWANIE -->
         <div id="page-login" class="page hidden">
             <div class="card" style="max-width: 500px; margin: 0 auto;">
                 <h2>Logowanie Mieszkańca</h2>
-                <div class="form-group"><label>Nick z serwera</label><input type="text" id="login-nick" placeholder="Wpisz nick"></div>
-                <div class="form-group"><label>Hasło</label><input type="password" id="login-pass" placeholder="Wpisz hasło"></div>
-                <div class="form-group checkbox-group"><input type="checkbox" id="login-rules"><label for="login-rules" style="margin:0; font-weight:normal;">Akceptuję regulamin</label></div>
-                <button class="btn btn-primary btn-full" onclick="handleLogin()">Zaloguj / Zarejestruj się</button>
+                <div class="form-group"><label>Nick</label><input type="text" id="login-nick"></div>
+                <div class="form-group"><label>Hasło</label><input type="password" id="login-pass"></div>
+                <button class="btn btn-primary btn-full" onclick="handleLogin()">Zaloguj / Zarejestruj</button>
                 <div id="login-msg" style="margin-top:15px; color:var(--danger); font-size:0.9rem;"></div>
             </div>
         </div>
 
+        <!-- LISTA USŁUG -->
         <div id="page-services" class="page hidden">
-            <div class="card"><h2>e-Urzędnik: Złóż wniosek</h2><div id="services-list"></div></div>
+            <div class="card"><h2>Wybierz usługę</h2><div id="services-list"></div></div>
         </div>
 
+        <!-- FORMULARZ WNIOSKU (NOWE PODEJŚCIE) -->
+        <div id="page-app-form" class="page hidden">
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <h2 id="form-title">Wypełnij wniosek</h2>
+                <div id="form-fields"></div>
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button class="btn btn-primary" onclick="submitFormApp()">Wyślij wniosek</button>
+                    <button class="btn btn-sm" style="background:#cbd5e0; color:black;" onclick="navigate('services')">Anuluj</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOJE WNIOSKI -->
         <div id="page-my-apps" class="page hidden">
             <div class="card"><h2>Moje złożone wnioski</h2><div id="my-apps-list"></div></div>
         </div>
 
+        <!-- PROFIL -->
         <div id="page-profile" class="page hidden">
             <div class="card">
-                <h2>Dowód Mieszkańca & Mandaty</h2>
-                <div style="background: #f8fafc; padding: 20px; border: 2px dashed var(--primary); border-radius: 8px; margin-bottom: 20px;">
-                    <p><strong>Nick:</strong> <span id="prof-nick">-</span></p>
-                    <p><strong>Numer Mieszkańca:</strong> <span id="prof-id" style="color:var(--primary); font-weight:bold; letter-spacing: 1px;">-</span></p>
-                    <p><strong>Status:</strong> <span id="prof-status" class="badge badge-pending">-</span></p>
-                </div>
-                <h3>Moje aktywne mandaty</h3>
-                <div id="my-fines-list"></div>
+                <h2>Dane Mieszkańca</h2>
+                <div class="data-box"><strong>Nick:</strong> <span id="prof-nick">-</span></div>
+                <div class="data-box"><strong>ID:</strong> <span id="prof-id" style="color:var(--primary); font-weight:bold;">-</span></div>
+                <div class="data-box"><strong>Status:</strong> <span id="prof-status">-</span></div>
+                <h3 style="margin-top:20px;">Twoje aktywne mandaty</h3>
+                <div id="my-fines-list" style="color:var(--text-muted); font-size:0.9rem;">Brak mandatów.</div>
             </div>
         </div>
 
+        <!-- PANEL URZĘDNIKA -->
         <div id="page-admin" class="page hidden">
             <div id="admin-login-box" class="card" style="max-width: 500px; margin: 0 auto;">
                 <h2>Panel Urzędnika</h2>
-                <div class="form-group"><label>Hasło urzędnika:</label><input type="password" id="admin-pass" placeholder="Wpisz hasło dostępu"></div>
+                <div class="form-group"><label>Hasło</label><input type="password" id="admin-pass"></div>
                 <button class="btn btn-primary btn-full" onclick="loginAdmin()">Zaloguj</button>
                 <div id="admin-msg" style="margin-top:15px; color:var(--danger); font-size:0.9rem;"></div>
             </div>
 
             <div id="admin-panel-content" class="hidden">
                 <div class="tab-bar">
-                    <button class="tab-btn active" onclick="switchAdminTab('admin-apps')">Wnioski</button>
-                    <button class="tab-btn" onclick="switchAdminTab('admin-citizens')">Mieszkańcy</button>
-                    <button class="tab-btn" onclick="switchAdminTab('admin-fines')">Mandaty</button>
-                    <button class="tab-btn" onclick="switchAdminTab('admin-stats')">Statystyki</button>
+                    <button class="tab-btn active" onclick="switchAdminTab('tab-apps')">Wnioski</button>
+                    <button class="tab-btn" onclick="switchAdminTab('tab-citizens')">Mieszkańcy</button>
+                    <button class="tab-btn" onclick="switchAdminTab('tab-fines')">Mandaty</button>
+                    <button class="tab-btn" onclick="switchAdminTab('tab-laws')">Ustawy</button>
+                    <button class="tab-btn" onclick="switchAdminTab('tab-stats')">Statystyki</button>
                 </div>
 
-                <div id="admin-apps" class="card">
-                    <h3>Wnioski do rozpatrzenia</h3>
-                    <div id="admin-apps-list"></div>
-                </div>
-
-                <div id="admin-citizens" class="card hidden">
-                    <h3>Rejestr Mieszkańców</h3>
-                    <input type="text" id="search-citizen" placeholder="Szukaj po nicku..." oninput="filterCitizens()" style="margin-bottom:15px;">
+                <div id="tab-apps" class="card"><h3>System Wniosków</h3><div id="admin-apps-list"></div></div>
+                
+                <div id="tab-citizens" class="card hidden">
+                    <h3>Rejestr</h3>
+                    <input type="text" id="search-citizen" placeholder="Szukaj..." oninput="filterCitizens()" style="margin-bottom:15px;">
                     <div id="citizens-list"></div>
                 </div>
 
-                <div id="admin-fines" class="card hidden">
-                    <h3>Wystaw mandat karny</h3>
-                    <div class="grid-3" style="margin-bottom:20px;">
-                        <div class="form-group" style="margin:0"><label>Nick obywatela</label><input type="text" id="fine-nick" placeholder="Nick"></div>
-                        <div class="form-group" style="margin:0"><label>Kwota (PLN)</label><input type="number" id="fine-amount" placeholder="100"></div>
-                        <div class="form-group" style="margin:0"><label>Powód</label><input type="text" id="fine-reason" placeholder="Przekroczenie prędkości"></div>
+                <div id="tab-fines" class="card hidden">
+                    <h3>Wystaw mandat</h3>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr 2fr; gap:10px; margin-bottom:20px;">
+                        <input type="text" id="fine-nick" placeholder="Nick obywatela">
+                        <input type="number" id="fine-amount" placeholder="Kwota PLN">
+                        <input type="text" id="fine-reason" placeholder="Powód">
                     </div>
-                    <button class="btn btn-danger" onclick="issueFine()">Wystaw mandat</button>
-                    <h3 style="margin-top:30px">Historia wystawionych mandatów</h3>
+                    <button class="btn btn-danger" onclick="issueFine()">Wystaw</button>
+                    <h3 style="margin-top:30px">Wystawione</h3>
                     <div id="admin-fines-list"></div>
                 </div>
 
-                <div id="admin-stats" class="card hidden">
-                    <h3>Statystyki Państwa</h3>
+                <div id="tab-laws" class="card hidden">
+                    <h3>Tworzenie Ustaw</h3>
+                    <div class="form-group"><label>Nazwa Ustawy</label><input type="text" id="law-title"></div>
+                    <div class="form-group"><label>Treść Ustawy</label><textarea id="law-content" rows="4"></textarea></div>
+                    <button class="btn btn-primary" onclick="publishLaw()">Opublikuj Ustawę</button>
+                </div>
+
+                <div id="tab-stats" class="card hidden">
+                    <h3>Statystyki</h3>
                     <div class="stats-grid">
-                        <div class="stat-box"><h4 id="stat-citizens-2">0</h4><p>Mieszkańców</p></div>
-                        <div class="stat-box"><h4 id="stat-companies-2">0</h4><p>Firm</p></div>
-                        <div class="stat-box"><h4 id="stat-apps-2">0</h4><p>Wniosków</p></div>
+                        <div class="stat-box"><h4 id="s-cit">0</h4><p>Mieszkańców</p></div>
+                        <div class="stat-box"><h4 id="s-comp">0</h4><p>Firm</p></div>
+                        <div class="stat-box"><h4 id="s-apps">0</h4><p>Wniosków</p></div>
                     </div>
                 </div>
                 
-                <button class="btn btn-danger" style="margin-top: 20px;" onclick="logoutAdmin()">Wyloguj z Panelu</button>
-            </div>
-        </div>
-
-        <div id="page-help" class="page hidden"><div class="card"><h2>Pomoc</h2><p>Skontaktuj się z administratorem.</p></div></div>
-        <div id="page-contact" class="page hidden"><div class="card"><h2>Kontakt</h2><p>admin@polandria.pl</p></div></div>
-    </div>
-
-    <!-- MODAL DYNAMICZNYCH WNIOSKÓW -->
-    <div id="app-modal" class="modal hidden">
-        <div class="modal-content">
-            <h2 id="modal-title">Złóż wniosek</h2>
-            <div id="modal-fields"></div>
-            <div class="modal-actions">
-                <button class="btn btn-primary" onclick="submitModalApp()">Wyślij wniosek</button>
-                <button class="btn btn-sm" style="background:#cbd5e0;" onclick="closeModal()">Anuluj</button>
+                <button class="btn btn-danger" style="margin-top: 20px;" onclick="logoutAdmin()">Wyloguj</button>
             </div>
         </div>
     </div>
 
-    <footer>&copy; 2023 Państwo Polandria | Portal Rządowy gov.polandria.pl</footer>
+<footer>&copy; 2023 Państwo Polandria</footer>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -249,70 +216,57 @@
 
     let currentUser = null;
     let allCitizens = [];
-    let currentModalData = { type: '', cat: '', fields: [] };
+    let currentFormType = null;
 
-    // ZDEFINIWANIE WNIOSKÓW I ICH POLA
-    const applicationTypes = [
-        { cat: "Obywatelskie", items: [
-            { name: "Wniosek o obywatelstwo", fields: [] },
-            { name: "Wniosek o wydanie dowodu mieszkańca", fields: [] },
-            { name: "Wniosek o zmianę danych", fields: [{id:'newData', label:'Jakie dane zmienić? (opis)'}] }
-        ]},
-        { cat: "Mieszkaniowe", items: [
-            { name: "Wniosek o przydział działki", fields: [{id:'location', label:'Preferowana lokalizacja'}] },
-            { name: "Wniosek o pozwolenie na budowę", fields: [{id:'bldAddress', label:'Adres budowy'}, {id:'bldType', label:'Typ budynku'}] },
-            { name: "Wniosek o nadanie adresu", fields: [{id:'street', label:'Ulica'}, {id:'bldNum', label:'Numer budynku'}, {id:'city', label:'Miasto'}] }
-        ]},
-        { cat: "Gospodarcze", items: [
-            { name: "Rejestracja firmy", fields: [{id:'companyName', label:'Nazwa firmy'}, {id:'companyAddress', label:'Adres siedziby'}, {id:'companyType', label:'Branża'}] },
-            { name: "Wniosek o licencję handlową", fields: [{id:'licenseType', label:'Rodzaj licencji'}] }
-        ]},
-        { cat: "Transportowe", items: [
-            { name: "Rejestracja pojazdu", fields: [{id:'vehicleModel', label:'Model pojazdu'}, {id:'plateReq', label:'Proponowane numery rejestracyjne'}] },
-            { name: "Wniosek o wydanie prawa jazdy", fields: [{id:'licenseCat', label:'Kategoria prawa jazdy (np. B, C)'}] },
-            { name: "Wniosek o odwołanie od mandatu karnego", fields: [{id:'fineId', label:'ID Mandatu (jeśli znane)'}, {id:'appealReason', label:'Powód odwołania'}] }
-        ]},
-        { cat: "Porządkowe", items: [
-            { name: "Zgłoszenie naruszenia prawa", fields: [{id:'violationDesc', label:'Opis naruszenia'}] },
-            { name: "Zgłoszenie problemu infrastrukturalnego", fields: [{id:'problemDesc', label:'Opis problemu'}] }
-        ]}
+    // DEFINICJA WNIOSKÓW (prosta, czytelna struktura)
+    const appTypes = [
+        { id: 'obywatelstwo', name: 'Wniosek o obywatelstwo', cat: 'Obywatelskie', fields: [] },
+        { id: 'dowod', name: 'Wniosek o wydanie dowodu', cat: 'Obywatelskie', fields: [] },
+        { id: 'zmiana_danych', name: 'Wniosek o zmianę danych', cat: 'Obywatelskie', fields: ['Jakie dane zmienić (opis)'] },
+        { id: 'adres', name: 'Wniosek o nadanie adresu', cat: 'Mieszkaniowe', fields: ['Ulica', 'Numer budynku', 'Miasto'] },
+        { id: 'dzialka', name: 'Wniosek o przydział działki', cat: 'Mieszkaniowe', fields: ['Preferowana lokalizacja'] },
+        { id: 'budowa', name: 'Wniosek o pozwolenie na budowę', cat: 'Mieszkaniowe', fields: ['Adres budowy', 'Typ budynku'] },
+        { id: 'firma', name: 'Rejestracja firmy', cat: 'Gospodarcze', fields: ['Nazwa firmy', 'Adres siedziby', 'Branża'] },
+        { id: 'licencja', name: 'Wniosek o licencję handlową', cat: 'Gospodarcze', fields: ['Rodzaj licencji'] },
+        { id: 'pojazd', name: 'Rejestracja pojazdu', cat: 'Transportowe', fields: ['Model pojazdu', 'Proponowane numery rejestracyjne'] },
+        { id: 'prawo_jazdy', name: 'Wniosek o prawo jazdy', cat: 'Transportowe', fields: ['Kategoria prawa jazdy (np. B)'] },
+        { id: 'mandat_odwolanie', name: 'Odwołanie od mandatu', cat: 'Porządkowe', fields: ['ID Mandatu', 'Powód odwołania'] },
+        { id: 'zgloszenie', name: 'Zgłoszenie naruszenia prawa', cat: 'Porządkowe', fields: ['Opis naruszenia'] }
     ];
 
+    // --- NAWIGACJA ---
     window.navigate = function(pageId) {
         document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
         document.getElementById('page-' + pageId).classList.remove('hidden');
         document.querySelectorAll('#main-nav a').forEach(a => a.classList.remove('active'));
         const al = document.querySelector(`#main-nav a[data-page="${pageId}"]`); if(al) al.classList.add('active');
         if(pageId === 'services') renderServices();
-        if(pageId === 'my-apps') renderMyApps();
-        if(pageId === 'profile') renderMyFines();
-        if(pageId === 'admin') loadAdminData();
+        if(pageId === 'my-apps') loadMyApps();
+        if(pageId === 'profile') loadProfile();
+        if(pageId === 'admin') loadAdminApps();
     }
 
-    // --- LOGOWANIE ---
+    // --- LOGOWANIE MIESZKAŃCA ---
     window.handleLogin = async function() {
         const nick = document.getElementById('login-nick').value.trim();
         const pass = document.getElementById('login-pass').value;
-        const rules = document.getElementById('login-rules').checked;
-        const msg = document.getElementById('login-msg');
-        if(!nick || !pass) return (msg.textContent = "Wypełnick nick i hasło!");
-        if(!rules) return (msg.textContent = "Zaakceptuj regulamin!");
+        if(!nick || !pass) return (document.getElementById('login-msg').textContent = "Wypełnij pola!");
         try {
             const q = query(collection(db, "citizens"), where("nick", "==", nick));
             const snap = await getDocs(q);
             if (snap.empty) {
-                const uid = "PLR-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000);
+                const uid = "PLR-" + Date.now();
                 await setDoc(doc(db, "citizens", uid), { nick, password: pass, uid, role: "Mieszkaniec", status: "Oczekuje", registeredAt: serverTimestamp() });
                 currentUser = { nick, uid, role: "Mieszkaniec", status: "Oczekuje" };
             } else {
                 const uDoc = snap.docs[0].data();
-                if(uDoc.password !== pass) return (msg.textContent = "Błędne hasło!");
+                if(uDoc.password !== pass) return (document.getElementById('login-msg').textContent = "Błędne hasło!");
                 currentUser = uDoc;
             }
             setupUI(); navigate('home');
-        } catch (e) { msg.textContent = "Błąd: " + e.message; }
+        } catch (e) { document.getElementById('login-msg').textContent = "Błąd bazy: " + e.message; }
     }
-    window.logout = function() { currentUser = null; document.getElementById('login-nick').value=''; document.getElementById('login-pass').value=''; setupUI(); navigate('home'); }
+    window.logout = function() { currentUser = null; setupUI(); navigate('home'); }
     
     function setupUI() {
         const isLogged = !!currentUser;
@@ -320,177 +274,272 @@
         document.getElementById('nav-logout').classList.toggle('hidden', !isLogged);
         document.getElementById('nav-apps').classList.toggle('hidden', !isLogged);
         document.getElementById('nav-profile').classList.toggle('hidden', !isLogged);
-        if(isLogged) {
-            document.getElementById('prof-nick').textContent = currentUser.nick;
-            document.getElementById('prof-id').textContent = currentUser.uid;
-            document.getElementById('prof-status').textContent = currentUser.status;
-        }
     }
 
-    // --- SYSTEM WNIOSKÓW (MODAL) ---
+    // --- SYSTEM WNIOSKÓW (NOWY) ---
     function renderServices() {
         const c = document.getElementById('services-list'); let h = '';
-        applicationTypes.forEach(cat => {
-            h += `<h3 style="margin-top:20px; color:var(--primary);">${cat.cat}</h3>`;
-            cat.items.forEach(item => {
-                h += `<div class="service-item"><span>${item.name}</span><button class="btn btn-primary btn-sm" onclick="openAppModal('${item.name}', '${cat.cat}', ${JSON.stringify(item.fields)})">Złóż wniosek</button></div>`;
-            });
+        appTypes.forEach(app => {
+            h += `<div class="service-item"><span><strong>${app.name}</strong> <br><small style="color:var(--text-muted)">Kategoria: ${app.cat}</small></span><button class="btn btn-primary btn-sm" onclick="openForm('${app.id}')">Złóż wniosek</button></div>`;
         });
         c.innerHTML = h;
     }
 
-    window.openAppModal = function(type, cat, fields) {
+    window.openForm = function(appId) {
         if(!currentUser) return navigate('login');
-        currentModalData = { type, cat, fields };
-        document.getElementById('modal-title').textContent = type;
-        let fHtml = '';
-        if(fields.length === 0) fHtml = '<p style="color:var(--text-muted); font-size:0.9rem;">Ten wniosek nie wymaga dodatkowych danych. Kliknij "Wyślij wniosek" aby potwierdzić.</p>';
-        else fields.forEach(f => { fHtml += `<div class="form-group"><label>${f.label}</label><input type="text" id="modal-${f.id}"></div>`; });
-        document.getElementById('modal-fields').innerHTML = fHtml;
-        document.getElementById('app-modal').classList.remove('hidden');
+        const app = appTypes.find(a => a.id === appId);
+        currentFormType = app;
+        document.getElementById('form-title').textContent = app.name;
+        
+        let fieldsHtml = '';
+        if(app.fields.length === 0) {
+            fieldsHtml = '<p style="color:var(--text-muted); margin-bottom:20px;">Ten wniosek nie wymaga dodatkowych danych.</p>';
+        } else {
+            app.fields.forEach((f, index) => {
+                fieldsHtml += `<div class="form-group"><label>${f}</label><input type="text" id="dyn-field-${index}"></div>`;
+            });
+        }
+        document.getElementById('form-fields').innerHTML = fieldsHtml;
+        navigate('app-form');
     }
 
-    window.closeModal = () => document.getElementById('app-modal').classList.add('hidden');
-
-    window.submitModalApp = async function() {
+    window.submitFormApp = async function() {
         let details = {};
-        currentModalData.fields.forEach(f => { details[f.id] = document.getElementById('modal-' + f.id).value; });
+        if(currentFormType.fields.length > 0) {
+            currentFormType.fields.forEach((f, index) => {
+                details[f] = document.getElementById('dyn-field-' + index).value.trim();
+            });
+        }
+
         try {
             await addDoc(collection(db, "applications"), {
-                applicantNick: currentUser.nick, applicantUid: currentUser.uid,
-                type: currentModalData.type, category: currentModalData.cat,
-                details: details, status: "Oczekuje na rozpatrzenie", createdAt: serverTimestamp()
+                applicantUid: currentUser.uid,
+                applicantNick: currentUser.nick,
+                type: currentFormType.name,
+                category: currentFormType.cat,
+                details: details,
+                status: "Oczekuje na rozpatrzenie",
+                createdAt: serverTimestamp()
             });
-            closeModal(); alert("Wniosek złożony pomyślnie!"); navigate('my-apps');
-        } catch(e) { alert("Błąd: "+e.message); }
+            alert("Wniosek wysłany pomyślnie!");
+            navigate('my-apps');
+        } catch (error) {
+            alert("BŁĄD WYSYŁANIA: " + error.message);
+        }
     }
 
-    function renderMyApps() {
+    // --- MOJE WNIOSKI (CZYSTA REAKTYWNOŚĆ) ---
+    function loadMyApps() {
         if(!currentUser) return;
         const c = document.getElementById('my-apps-list');
-        onSnapshot(query(collection(db, "applications"), where("applicantNick", "==", currentUser.nick), orderBy("createdAt", "desc")), (snap) => {
-            if(snap.empty) { c.innerHTML = '<p class="empty-state">Brak wniosków.</p>'; return; }
-            let h = '';
-            snap.forEach(d => {
-                const data = d.data(); let time = data.createdAt ? data.createdAt.toDate().toLocaleString('pl-PL') : '';
-                let bc = 'badge-pending'; if(data.status.includes('traku')) bc='badge-processing'; if(data.status.includes('Zaakcept')) bc='badge-accepted'; if(data.status.includes('Odrzu')) bc='badge-rejected';
+        c.innerHTML = 'Ładowanie...';
+        
+        const q = query(collection(db, "applications"), where("applicantUid", "==", currentUser.uid), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if(snapshot.empty) { c.innerHTML = 'Nie złożyłeś jeszcze żadnych wniosków.'; return; }
+            
+            let html = '';
+            snapshot.forEach(d => {
+                const data = d.data();
+                let time = data.createdAt ? data.createdAt.toDate().toLocaleString('pl-PL') : '';
+                let bc = 'badge-pending'; 
+                if(data.status.includes('Zaakcept')) bc = 'badge-accepted'; 
+                if(data.status.includes('Odrzu')) bc = 'badge-rejected';
+
                 let detHtml = '';
-                if(data.details && Object.keys(data.details).length > 0) {
-                    detHtml = '<div style="font-size:0.85rem; color:var(--text-muted); margin-top:5px; background:#f8fafc; padding:5px;">';
-                    for (const [key, value] of Object.entries(data.details)) { if(value) detHtml += `<strong>${key}:</strong> ${value}<br>`; }
-                    detHtml += '</div>';
+                if(data.details) {
+                    for (const [key, value] of Object.entries(data.details)) {
+                        if(value) detHtml += `<strong>${key}:</strong> ${value}<br>`;
+                    }
                 }
-                h += `<div class="service-item" style="flex-direction:column; align-items:flex-start;"><div style="display:flex; justify-content:space-between; width:100%;"><strong>${data.type}</strong><span class="badge ${bc}">${data.status}</span></div><small style="color:var(--text-muted);">Złożono: ${time}</small>${detHtml}</div>`;
+
+                html += `<div class="service-item" style="flex-direction:column; align-items:flex-start;">
+                    <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:5px;">
+                        <strong>${data.type}</strong> <span class="badge ${bc}">${data.status}</span>
+                    </div>
+                    <small style="color:var(--text-muted)">Złożono: ${time}</small>
+                    ${detHtml ? `<div class="data-box">${detHtml}</div>` : ''}
+                </div>`;
             });
-            c.innerHTML = h;
+            c.innerHTML = html;
         });
     }
 
-    // --- MANDATY DLA OBYWATELI ---
-    window.appealFine = function(fineId) {
-        openAppModal('Wniosek o odwołanie od mandatu karnego', 'Transportowe', [{id:'fineId', label:'ID Mandatu'}, {id:'appealReason', label:'Powód odwołania'}]);
-        setTimeout(() => { const el = document.getElementById('modal-fineId'); if(el) el.value = fineId; el.disabled = true; }, 100);
-    }
-
-    function renderMyFines() {
+    // --- PROFIL I MANDATY ---
+    function loadProfile() {
         if(!currentUser) return;
+        document.getElementById('prof-nick').textContent = currentUser.nick;
+        document.getElementById('prof-id').textContent = currentUser.uid;
+        document.getElementById('prof-status').textContent = currentUser.status;
+
         const c = document.getElementById('my-fines-list');
-        onSnapshot(query(collection(db, "fines"), where("citizenNick", "==", currentUser.nick), orderBy("createdAt", "desc")), (snap) => {
+        onSnapshot(query(collection(db, "fines"), where("citizenNick", "==", currentUser.nick)), (snap) => {
             const active = snap.docs.filter(d => d.data().status === 'Aktywny');
-            if(active.length === 0) { c.innerHTML = '<p style="color:var(--text-muted); font-size:0.9rem;">Brak aktywnych mandatów. Grzeczny obywatel!</p>'; return; }
+            if(active.length === 0) { c.innerHTML = 'Brak aktywnych mandatów.'; return; }
             let h = '';
             active.forEach(d => {
                 const f = d.data();
-                h += `<div class="fine-item"><div style="display:flex; justify-content:space-between; align-items:center;"><div><strong>ID: ${d.id}</strong> - ${f.reason}</div><span class="badge badge-danger">${f.amount} PLN</span></div><button class="btn btn-warning btn-sm" style="margin-top:10px;" onclick="appealFine('${d.id}')">Odwołaj się</button></div>`;
+                h += `<div class="fine-item"><strong>ID: ${d.id}</strong> - ${f.reason} [<span style="color:var(--danger)">${f.amount} PLN</span>]</div>`;
             });
             c.innerHTML = h;
         });
     }
 
     // --- PANEL URZĘDNIKA ---
-    window.loginAdmin = function() { if(document.getElementById('admin-pass').value === "POLANDRIA_ADMIN") { document.getElementById('admin-login-box').classList.add('hidden'); document.getElementById('admin-panel-content').classList.remove('hidden'); loadAdminData(); } else document.getElementById('admin-msg').textContent = "Błędne hasło!"; }
-    window.logoutAdmin = function() { document.getElementById('admin-panel-content').classList.add('hidden'); document.getElementById('admin-login-box').classList.remove('hidden'); document.getElementById('admin-pass').value = ''; navigate('home'); }
+    window.loginAdmin = function() { 
+        if(document.getElementById('admin-pass').value === "POLANDRIA_ADMIN") { 
+            document.getElementById('admin-login-box').classList.add('hidden'); 
+            document.getElementById('admin-panel-content').classList.remove('hidden'); 
+            loadAdminApps(); loadAdminLaws();
+        } else document.getElementById('admin-msg').textContent = "Błędne hasło!"; 
+    }
+    window.logoutAdmin = function() { document.getElementById('admin-panel-content').classList.add('hidden'); document.getElementById('admin-login-box').classList.remove('hidden'); navigate('home'); }
     
     window.switchAdminTab = function(tabId) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); event.target.classList.add('active');
-        ['admin-apps', 'admin-citizens', 'admin-fines', 'admin-stats'].forEach(id => document.getElementById(id).classList.toggle('hidden', id !== tabId));
-        if(tabId === 'admin-fines') loadAdminFines();
-        if(tabId === 'admin-citizens') loadCitizens();
+        ['tab-apps', 'tab-citizens', 'tab-fines', 'tab-laws', 'tab-stats'].forEach(id => document.getElementById(id).classList.toggle('hidden', id !== tabId));
+        if(tabId === 'tab-apps') loadAdminApps();
+        if(tabId === 'tab-citizens') loadCitizens();
+        if(tabId === 'tab-fines') loadFines();
+        if(tabId === 'tab-stats') loadStats();
     }
 
-    function loadAdminData() {
-        let appsCount = 0; let companiesCount = 0;
+    function loadAdminApps() {
+        const c = document.getElementById('admin-apps-list');
+        c.innerHTML = 'Ładowanie wniosków...';
         onSnapshot(query(collection(db, "applications"), orderBy("createdAt", "desc")), (snap) => {
-            appsCount = snap.size; companiesCount = snap.docs.filter(d => d.data().type === 'Rejestracja firmy' && d.data().status === 'Zaakceptowany').length;
-            document.getElementById('stat-apps').textContent = appsCount; document.getElementById('stat-apps-2').textContent = appsCount;
-            document.getElementById('stat-companies').textContent = companiesCount; document.getElementById('stat-companies-2').textContent = companiesCount;
-            
-            const c = document.getElementById('admin-apps-list');
-            if(snap.empty) { c.innerHTML = '<p class="empty-state">Brak wniosków.</p>'; return; }
+            if(snap.empty) { c.innerHTML = 'Brak wniosków w systemie.'; return; }
             let h = '';
             snap.forEach(d => {
-                const data = d.data(); let time = data.createdAt ? data.createdAt.toDate().toLocaleString('pl-PL') : '';
-                let detHtml = '<div style="font-size:0.85rem; margin:5px 0; background:#f8fafc; padding:8px; border-radius:4px;">';
-                if(data.details) { for (const [key, value] of Object.entries(data.details)) { if(value) detHtml += `<strong>${key}:</strong> ${value}<br>`; } } else detHtml += 'Brak dodatkowych danych'; detHtml += '</div>';
-                
-                h += `<div class="service-item" style="flex-direction:column; align-items:flex-start;"><div style="width:100%;display:flex;justify-content:space-between;"><div><strong>${data.type}</strong> <span style="color:var(--text-muted)">- ${data.applicantNick}</span></div><span class="badge badge-pending">${data.status}</span></div><small>Kategoria: ${data.category} | ${time}</small>${detHtml}<div style="display:flex;gap:5px;margin-top:10px; flex-wrap:wrap;"><button class="btn btn-success btn-sm" onclick="changeStatus('${d.id}', 'Zaakceptowany')">Akceptuj</button><button class="btn btn-warning btn-sm" onclick="changeStatus('${d.id}', 'W trakcie realizacji')">W realizacji</button><button class="btn btn-danger btn-sm" onclick="changeStatus('${d.id}', 'Odrzucony')">Odrzuć</button><button class="btn btn-sm" style="background:#333;color:white;" onclick="deleteApp('${d.id}')">USUŃ TRWALE</button></div></div>`;
-            });
-            c.innerHTML = h;
-        });
-        onSnapshot(collection(db, "citizens"), (snap) => { document.getElementById('stat-citizens').textContent = snap.size; document.getElementById('stat-citizens-2').textContent = snap.size; });
-        onSnapshot(collection(db, "fines"), (snap) => { document.getElementById('stat-fines').textContent = snap.size; });
-    }
+                const data = d.data();
+                let time = data.createdAt ? data.createdAt.toDate().toLocaleString('pl-PL') : '';
+                let detHtml = '';
+                if(data.details) { for (const [key, value] of Object.entries(data.details)) { if(value) detHtml += `${key}: ${value} | `; } }
 
-    window.changeStatus = async function(id, status) { try { await updateDoc(doc(db, "applications", id), { status }); } catch(e) { alert("Błąd: "+e.message); } }
-    window.deleteApp = async function(id) { if(confirm("Na pewno usunąć ten wniosek bezpowrotnie z bazy?")) { try { await deleteDoc(doc(db, "applications", id)); } catch(e) { alert("Błąd: "+e.message); } } }
-
-    window.issueFine = async function() {
-        const nick = document.getElementById('fine-nick').value.trim();
-        const amount = document.getElementById('fine-amount').value;
-        const reason = document.getElementById('fine-reason').value.trim();
-        if(!nick || !amount || !reason) return alert("Wypełnij wszystkie pola mandatu!");
-        try {
-            await addDoc(collection(db, "fines"), { citizenNick: nick, amount: amount, reason: reason, issuedBy: 'Urzędnik', status: 'Aktywny', createdAt: serverTimestamp() });
-            document.getElementById('fine-nick').value = ''; document.getElementById('fine-amount').value = ''; document.getElementById('fine-reason').value = '';
-            loadAdminFines();
-        } catch(e) { alert("Błąd: "+e.message); }
-    }
-
-    function loadAdminFines() {
-        const c = document.getElementById('admin-fines-list');
-        onSnapshot(query(collection(db, "fines"), orderBy("createdAt", "desc")), (snap) => {
-            if(snap.empty) { c.innerHTML = '<p class="empty-state">Brak mandatów.</p>'; return; }
-            let h = '';
-            snap.forEach(d => {
-                const f = d.data(); let time = f.createdAt ? f.createdAt.toDate().toLocaleString('pl-PL') : '';
-                h += `<div class="fine-item"><div style="display:flex; justify-content:space-between; align-items:center;"><div><strong>${f.citizenNick}</strong> - ${f.reason} <br><small style="color:var(--text-muted)">ID: ${d.id} | Wystawiono: ${time}</small></div><div style="text-align:right;"><span class="badge badge-danger">${f.amount} PLN</span><br><button class="btn btn-success btn-sm" style="margin-top:5px;" onclick="cancelFine('${d.id}')">Anuluj</button></div></div></div>`;
+                h += `<div class="service-item" style="flex-direction:column; align-items:flex-start;">
+                    <div style="width:100%;display:flex;justify-content:space-between; margin-bottom:5px;">
+                        <strong>${data.type}</strong> <span class="badge badge-pending">${data.status}</span>
+                    </div>
+                    <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:5px;">
+                        Obywatel: <strong>${data.applicantNick}</strong> (${data.applicantUid}) | ${time} <br>
+                        ${detHtml}
+                    </div>
+                    <div style="display:flex;gap:5px; flex-wrap:wrap;">
+                        <button class="btn btn-success btn-sm" onclick="updateAppStatus('${d.id}', 'Zaakceptowany')">Akceptuj</button>
+                        <button class="btn btn-warning btn-sm" onclick="updateAppStatus('${d.id}', 'W trakcie realizacji')">W realizacji</button>
+                        <button class="btn btn-danger btn-sm" onclick="updateAppStatus('${d.id}', 'Odrzucony')">Odrzuć</button>
+                        <button class="btn btn-sm" style="background:#333; color:white;" onclick="deleteAppPermanently('${d.id}')">USUŃ TRWALE Z BAZY</button>
+                    </div>
+                </div>`;
             });
             c.innerHTML = h;
         });
     }
 
-    window.cancelFine = async function(id) { try { await updateDoc(doc(db, "fines", id), { status: 'Anulowany' }); } catch(e) { alert("Błąd: "+e.message); } }
+    window.updateAppStatus = async function(id, status) { try { await updateDoc(doc(db, "applications", id), { status }); } catch(e) { alert("Błąd: "+e.message); } }
+    
+    window.deleteAppPermanently = async function(id) {
+        if(confirm("Na pewno chcesz bezpowrotnie usunąć ten wniosek z bazy danych? Obywatel przestanie go widzieć!")) {
+            try { 
+                await deleteDoc(doc(db, "applications", id)); 
+                // Nie odświeżamy ręcznie, onSnapshot zrobi to sam!
+            } catch(e) { alert("Błąd usuwania: "+e.message); }
+        }
+    }
 
+    // --- URZĘDNIK: MIESZKAŃCY ---
     function loadCitizens() {
-        onSnapshot(collection(db, "citizens"), (snap) => { allCitizens = []; snap.forEach(d => allCitizens.push(d.data())); filterCitizens(); });
+        onSnapshot(collection(db, "citizens"), (snap) => { allCitizens = []; snap.forEach(d => allCitizens.push({id: d.id, ...d.data()})); filterCitizens(); });
     }
-
     window.filterCitizens = function() {
         const s = document.getElementById('search-citizen').value.toLowerCase();
         const f = allCitizens.filter(c => c.nick.toLowerCase().includes(s));
         const c = document.getElementById('citizens-list');
-        if(f.length === 0) { c.innerHTML = '<p class="empty-state">Brak.</p>'; return; }
+        if(f.length === 0) { c.innerHTML = 'Brak wyników.'; return; }
         let h = '';
         f.forEach(c => {
-            h += `<div class="service-item"><div><strong>${c.nick}</strong> <span style="color:var(--text-muted);font-size:0.8rem;">(${c.uid})</span><div style="font-size:0.8rem;margin-top:5px;">Rola: ${c.role} | Status: ${c.status}</div></div><div style="display:flex;gap:5px;flex-direction:column;align-items:flex-end;"><select onchange="changeRole('${c.uid}', this.value)" style="width:150px;padding:5px;font-size:0.8rem;">${['Mieszkaniec','Obywatel','Przedsiębiorca','Urzędnik','Minister','Sędzia','Administrator','Król'].map(r=>`<option value="${r}" ${c.role===r?'selected':''}>${r}</option>`).join('')}</select><button class="btn btn-success btn-sm" onclick="grantCitizenship('${c.uid}')">Daj Obywatelstwo</button></div></div>`;
+            h += `<div class="service-item"><div><strong>${c.nick}</strong> (${c.id})<br><small>Status: ${c.status}</small></div><button class="btn btn-success btn-sm" onclick="grantCitizenship('${c.id}')">Daj Obywatelstwo</button></div>`;
         });
         c.innerHTML = h;
     }
+    window.grantCitizenship = async function(id) { try { await updateDoc(doc(db, "citizens", id), { status: "Obywatel Polandrii" }); } catch(e) { alert("Błąd: "+e.message); } }
 
-    window.changeRole = async function(uid, newRole) { try { await updateDoc(doc(db, "citizens", uid), { role: newRole }); } catch(e) { alert("Błąd: "+e.message); } }
-    window.grantCitizenship = async function(uid) { try { await updateDoc(doc(db, "citizens", uid), { status: "Obywatel Polandrii" }); } catch(e) { alert("Błąd: "+e.message); } }
+    // --- URZĘDNIK: MANDATY ---
+    window.issueFine = async function() {
+        const nick = document.getElementById('fine-nick').value.trim();
+        const amount = document.getElementById('fine-amount').value;
+        const reason = document.getElementById('fine-reason').value.trim();
+        if(!nick || !amount || !reason) return alert("Wypełnij dane mandatu!");
+        try {
+            await addDoc(collection(db, "fines"), { citizenNick: nick, amount: amount, reason: reason, status: 'Aktywny', createdAt: serverTimestamp() });
+            document.getElementById('fine-nick').value=''; document.getElementById('fine-amount').value=''; document.getElementById('fine-reason').value='';
+        } catch(e) { alert("Błąd: "+e.message); }
+    }
+    function loadFines() {
+        const c = document.getElementById('admin-fines-list');
+        onSnapshot(collection(db, "fines"), (snap) => {
+            if(snap.empty) { c.innerHTML = 'Brak mandatów.'; return; }
+            let h = '';
+            snap.forEach(d => {
+                const f = d.data();
+                let style = f.status === 'Aktywny' ? 'fine-item' : 'data-box';
+                h += `<div class="${style}" style="display:flex; justify-content:space-between; align-items:center;">
+                    <div><strong>${f.citizenNick}</strong> - ${f.reason} <br><small>ID: ${d.id} | Status: ${f.status}</small></div>
+                    ${f.status === 'Aktywny' ? `<button class="btn btn-warning btn-sm" onclick="cancelFine('${d.id}')">Anuluj</button>` : ''}
+                </div>`;
+            });
+            c.innerHTML = h;
+        });
+    }
+    window.cancelFine = async function(id) { try { await updateDoc(doc(db, "fines", id), { status: 'Anulowany' }); } catch(e) { alert("Błąd: "+e.message); } }
 
-    setupUI(); navigate('home');
+    // --- URZĘDNIK: USTAWY ---
+    window.publishLaw = async function() {
+        const title = document.getElementById('law-title').value.trim();
+        const content = document.getElementById('law-content').value.trim();
+        if(!title || !content) return alert("Wypełnij tytuł i treść ustawy!");
+        try {
+            await addDoc(collection(db, "laws"), { title, content, createdAt: serverTimestamp() });
+            document.getElementById('law-title').value=''; document.getElementById('law-content').value='';
+            alert("Ustawa opublikowana!");
+        } catch(e) { alert("Błąd: "+e.message); }
+    }
+
+    function loadAdminLaws() {
+        onSnapshot(collection(db, "laws"), () => { loadHomeLaws(); }); // Odświeża listę na głównej
+    }
+
+    function loadHomeLaws() {
+        const c = document.getElementById('home-laws-list');
+        onSnapshot(query(collection(db, "laws"), orderBy("createdAt", "desc")), (snap) => {
+            if(snap.empty) { c.innerHTML = 'Brak ustaw w systemie.'; return; }
+            let h = '';
+            snap.forEach(d => {
+                const l = d.data();
+                h += `<div class="data-box" style="margin-bottom:10px; border-left: 4px solid var(--accent);"><strong style="color:var(--primary);">${l.title}</strong><br>${l.content}</div>`;
+            });
+            c.innerHTML = h;
+        });
+    }
+
+    // --- STATYSTYKI (Z LICZENIEM FIRM) ---
+    function loadStats() {
+        onSnapshot(collection(db, "citizens"), (snap) => { document.getElementById('s-cit').textContent = snap.size; });
+        onSnapshot(collection(db, "applications"), (snap) => { 
+            document.getElementById('s-apps').textContent = snap.size;
+            document.getElementById('stat-apps').textContent = snap.size;
+            // Zlicza tylko zaakceptowane firmy!
+            const companies = snap.docs.filter(d => d.data().type === 'Rejestracja firmy' && d.data().status === 'Zaakceptowany').length;
+            document.getElementById('s-comp').textContent = companies;
+            document.getElementById('stat-companies').textContent = companies;
+        });
+    }
+
+    // INICJALIZACJA
+    setupUI();
+    loadHomeLaws();
+    navigate('home');
+
 </script>
 </body>
 </html>
