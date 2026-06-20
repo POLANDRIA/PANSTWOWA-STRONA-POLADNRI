@@ -11,7 +11,7 @@
             --bg-dark: #0f172a;
             --primary: #1e3a5f;
             --primary-light: #2c5282;
-            --accent: #d4af37; /* Złoty */
+            --accent: #d4af37;
             --text-dark: #1a202c;
             --text-muted: #64748b;
             --white: #ffffff;
@@ -24,11 +24,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-dark); }
         
-        /* TOP BAR */
         .top-bar { background-color: var(--bg-dark); color: var(--white); padding: 5px 20px; font-size: 0.8rem; display: flex; justify-content: space-between; }
         .top-bar a { color: var(--accent); text-decoration: none; margin-left: 15px; }
 
-        /* HEADER */
         header { background-color: var(--white); border-bottom: 3px solid var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 15px; cursor: pointer; }
@@ -40,7 +38,6 @@
         nav ul li a { text-decoration: none; color: var(--primary); padding: 10px 15px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
         nav ul li a:hover, nav ul li a.active { background-color: var(--primary); color: var(--white); }
 
-        /* MAIN CONTENT */
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
         .card { background: var(--white); border-radius: 8px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; border-top: 4px solid var(--primary); }
         .card-gold { border-top-color: var(--accent); }
@@ -48,7 +45,6 @@
         h2 { color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--bg-main); padding-bottom: 10px; }
         h3 { color: var(--text-dark); margin-bottom: 10px; }
 
-        /* FORMS */
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; color: var(--primary); }
         input[type="text"], input[type="password"], select, textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 4px; font-size: 1rem; }
@@ -64,15 +60,14 @@
         .btn-danger { background-color: var(--danger); color: white; }
         .btn-success { background-color: var(--success); color: white; }
         .btn-warning { background-color: var(--warning); color: white; }
+        .btn-full { width: 100%; }
 
-        /* GRID LAYOUTS */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
         .stat-box { background: var(--primary); color: white; padding: 20px; border-radius: 8px; text-align: center; }
         .stat-box h4 { font-size: 2rem; margin-bottom: 5px; color: var(--accent); }
         .stat-box p { font-size: 0.9rem; opacity: 0.9; }
 
-        /* COMPONENTS */
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
         .badge-pending { background-color: #fefcbf; color: #975a16; }
         .badge-processing { background-color: #bee3f8; color: #2a4365; }
@@ -81,9 +76,6 @@
 
         .service-item { border: 1px solid #e2e8f0; padding: 15px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
         .service-item:hover { border-color: var(--primary); background: #f7fafc; }
-        
-        .notification-bell { position: relative; }
-        .notif-count { position: absolute; top: -5px; right: -5px; background: var(--danger); color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; }
 
         .hidden { display: none !important; }
         
@@ -108,6 +100,8 @@
             <span>gov.polandria.pl</span>
             <a href="#" onclick="navigate('help')">Pomoc</a>
             <a href="#" onclick="navigate('contact')">Kontakt</a>
+            <!-- LINK DO PANELU URZĘDNIKA -->
+            <a href="#" onclick="navigate('admin')" style="color:var(--warning);">Dla Urzędników</a>
         </div>
     </div>
 
@@ -126,7 +120,7 @@
                     <li><a href="#" data-page="services" onclick="navigate('services')">Usługi</a></li>
                     <li id="nav-apps" class="hidden"><a href="#" data-page="my-apps" onclick="navigate('my-apps')">Moje Wnioski</a></li>
                     <li id="nav-profile" class="hidden"><a href="#" data-page="profile" onclick="navigate('profile')">Profil</a></li>
-                    <li id="nav-admin" class="hidden"><a href="#" data-page="admin" onclick="navigate('admin')">Panel Urzędnika</a></li>
+                    <!-- USUNIĘTO LINK ADMINA Z GŁÓWNEGO MENU -->
                     <li id="nav-login"><a href="#" data-page="login" onclick="navigate('login')">Zaloguj się</a></li>
                     <li id="nav-logout" class="hidden"><a href="#" style="color:var(--danger)" onclick="logout()">Wyloguj</a></li>
                 </ul>
@@ -136,7 +130,6 @@
 
     <div class="container">
         
-        <!-- STRONA GŁÓWNA -->
         <div id="page-home" class="page">
             <div class="alert alert-info">
                 <strong>„Wszystkie sprawy państwowe w jednym miejscu.”</strong> <br>
@@ -169,7 +162,6 @@
             </div>
         </div>
 
-        <!-- LOGOWANIE / REJESTRACJA -->
         <div id="page-login" class="page hidden">
             <div class="card" style="max-width: 500px; margin: 0 auto;">
                 <h2>Logowanie / Rejestracja</h2>
@@ -191,7 +183,6 @@
             </div>
         </div>
 
-        <!-- CENTRUM USŁUG (LISTA 27 WNIOSKÓW) -->
         <div id="page-services" class="page hidden">
             <div class="card">
                 <h2>e-Urzędnik: Złóż wniosek</h2>
@@ -199,7 +190,6 @@
             </div>
         </div>
 
-        <!-- MOJE WNIOSKI -->
         <div id="page-my-apps" class="page hidden">
             <div class="card">
                 <h2>Moje złożone wnioski</h2>
@@ -207,15 +197,6 @@
             </div>
         </div>
 
-        <!-- POWIADOMIENIA -->
-        <div id="page-notifications" class="page hidden">
-            <div class="card">
-                <h2>Twoje powiadomienia</h2>
-                <div id="notif-list"></div>
-            </div>
-        </div>
-
-        <!-- PROFIL MIESZKAŃCA -->
         <div id="page-profile" class="page hidden">
             <div class="card">
                 <h2>Dowód Mieszkańca Polandrii</h2>
@@ -229,36 +210,54 @@
             </div>
         </div>
 
-        <!-- PANEL URZĘDNIKA -->
+        <!-- PANEL URZĘDNIKA W STYLU TCP -->
         <div id="page-admin" class="page hidden">
-            <div class="tab-bar">
-                <button class="tab-btn active" onclick="switchAdminTab('admin-apps')">Wnioski do rozpatrzenia</button>
-                <button class="tab-btn" onclick="switchAdminTab('admin-citizens')">Mieszkańcy</button>
-                <button class="tab-btn" onclick="switchAdminTab('admin-stats')">Statystyki</button>
-            </div>
-
-            <div id="admin-apps" class="card">
-                <h3>Wszystkie oczekujące wnioski</h3>
-                <div id="admin-apps-list"></div>
-            </div>
-
-            <div id="admin-citizens" class="card hidden">
-                <h3>Rejestr Mieszkańców</h3>
-                <input type="text" id="search-citizen" placeholder="Szukaj po nicku..." oninput="filterCitizens()" style="margin-bottom:15px;">
-                <div id="citizens-list"></div>
-            </div>
-
-            <div id="admin-stats" class="card hidden">
-                <h3>Statystyki Państwa</h3>
-                <div class="stats-grid">
-                    <div class="stat-box"><h4 id="stat-citizens-2">0</h4><p>Mieszkańców</p></div>
-                    <div class="stat-box"><h4 id="stat-apps-2">0</h4><p>Wniosków ogółem</p></div>
-                    <div class="stat-box"><h4>98%</h4><p>Spraw rozpatrzonych</p></div>
+            
+            <!-- EKRAN LOGOWANIA ADMINA -->
+            <div id="admin-login-box" class="card" style="max-width: 500px; margin: 0 auto;">
+                <h2>Panel Urzędnika - Logowanie</h2>
+                <p style="font-size:0.9rem; margin-bottom:20px; color:var(--danger);"><strong>Uwaga:</strong> Dostęp do tego panelu jest ściśle kontrolowany.</p>
+                <div class="form-group">
+                    <label>Hasło urzędnika:</label>
+                    <input type="password" id="admin-pass" placeholder="Wpisz hasło dostępu">
                 </div>
+                <button class="btn btn-primary btn-full" onclick="loginAdmin()">Zaloguj do systemu</button>
+                <div id="admin-msg" style="margin-top:15px; color:var(--danger); font-size:0.9rem;"></div>
             </div>
+
+            <!-- ZAWARTOŚĆ PO ZALOGOWANIU ADMINA -->
+            <div id="admin-panel-content" class="hidden">
+                <div class="tab-bar">
+                    <button class="tab-btn active" onclick="switchAdminTab('admin-apps')">Wnioski do rozpatrzenia</button>
+                    <button class="tab-btn" onclick="switchAdminTab('admin-citizens')">Mieszkańcy</button>
+                    <button class="tab-btn" onclick="switchAdminTab('admin-stats')">Statystyki</button>
+                </div>
+
+                <div id="admin-apps" class="card">
+                    <h3>Wszystkie oczekujące wnioski</h3>
+                    <div id="admin-apps-list"></div>
+                </div>
+
+                <div id="admin-citizens" class="card hidden">
+                    <h3>Rejestr Mieszkańców</h3>
+                    <input type="text" id="search-citizen" placeholder="Szukaj po nicku..." oninput="filterCitizens()" style="margin-bottom:15px;">
+                    <div id="citizens-list"></div>
+                </div>
+
+                <div id="admin-stats" class="card hidden">
+                    <h3>Statystyki Państwa</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box"><h4 id="stat-citizens-2">0</h4><p>Mieszkańców</p></div>
+                        <div class="stat-box"><h4 id="stat-apps-2">0</h4><p>Wniosków ogółem</p></div>
+                        <div class="stat-box"><h4>98%</h4><p>Spraw rozpatrzonych</p></div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-danger" style="margin-top: 20px;" onclick="logoutAdmin()">Wyloguj z Panelu Urzędnika</button>
+            </div>
+
         </div>
 
-        <!-- MODUŁY DODATKOWE (PLACEHOLDER) -->
         <div id="page-modules" class="page hidden">
             <div class="grid-3">
                 <div class="card"><h3>Księga Ustaw</h3><p>Brak dostępnych ustaw.</p></div>
@@ -283,7 +282,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, query, where, orderBy, getDocs, doc, updateDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // UŻYWAM TWOJEGO PROJEKTU FIREBASE
     const firebaseConfig = {
       apiKey: "AIzaSyAXXEeRwAffgnduFTL3Hg6IDQngBj2Kj6k",
       authDomain: "tcp-store-8a5b8.firebaseapp.com",
@@ -296,11 +294,9 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // GLOBALNY STAN UŻYTKOWNIKA
     let currentUser = null;
     let allCitizens = [];
 
-    // BAZA WNIOSKÓW Z OPISU
     const applicationTypes = [
         { cat: "Obywatelskie", items: ["Wniosek o obywatelstwo", "Wniosek o wydanie dowodu mieszkańca", "Wniosek o zmianę danych", "Wniosek o zmianę miejsca zamieszkania", "Wniosek o nadanie tytułu honorowego"] },
         { cat: "Mieszkaniowe", items: ["Wniosek o przydział działki", "Wniosek o zakup nieruchomości", "Wniosek o pozwolenie na budowę", "Zgłoszenie rozbudowy budynku", "Wniosek o zmianę przeznaczenia działki"] },
@@ -310,7 +306,6 @@
         { cat: "Porządkowe", items: ["Zgłoszenie naruszenia prawa", "Zgłoszenie problemu infrastrukturalnego", "Wniosek o mediację", "Odwołanie od decyzji urzędu"] }
     ];
 
-    // --- NAWIGACJA ---
     window.navigate = function(pageId) {
         document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
         document.getElementById('page-' + pageId).classList.remove('hidden');
@@ -321,11 +316,10 @@
 
         if(pageId === 'services') renderServices();
         if(pageId === 'my-apps') renderMyApps();
-        if(pageId === 'notifications') renderNotifications();
         if(pageId === 'admin') loadAdminData();
     }
 
-    // --- LOGOWANIE / REJESTRACJA ---
+    // --- SYSTEM LOGOWANIA MIESZKAŃCA ---
     window.handleLogin = async function() {
         const nick = document.getElementById('login-nick').value.trim();
         const pass = document.getElementById('login-pass').value;
@@ -336,34 +330,25 @@
         if(!rules) return (msgDiv.textContent = "Musisz zaakceptować regulamin!");
 
         try {
-            // Szukamy czy użytkownik istnieje
             const q = query(collection(db, "citizens"), where("nick", "==", nick));
             const snapshot = await getDocs(q);
 
             if (snapshot.empty) {
-                // REJESTRACJA
                 const uid = "PLR-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000);
                 await setDoc(doc(db, "citizens", uid), {
-                    nick: nick,
-                    password: pass, // W prawdziwym projekcie hasła się szyfrują! Tu dla prostoty gry tekst.
-                    uid: uid,
-                    role: "Mieszkaniec",
-                    status: "Oczekuje na obywatelstwo",
+                    nick: nick, password: pass, uid: uid,
+                    role: "Mieszkaniec", status: "Oczekuje na obywatelstwo",
                     registeredAt: serverTimestamp()
                 });
                 currentUser = { nick, uid, role: "Mieszkaniec", status: "Oczekuje na obywatelstwo" };
             } else {
-                // LOGOWANIE
                 const userDoc = snapshot.docs[0].data();
                 if(userDoc.password !== pass) return (msgDiv.textContent = "Błędne hasło!");
                 currentUser = userDoc;
             }
-
             setupUI();
             navigate('home');
-        } catch (error) {
-            msgDiv.textContent = "Błąd bazy: " + error.message;
-        }
+        } catch (error) { msgDiv.textContent = "Błąd bazy: " + error.message; }
     }
 
     window.logout = function() {
@@ -376,13 +361,10 @@
 
     function setupUI() {
         const isLoggedIn = !!currentUser;
-        const isAdmin = currentUser && (currentUser.role === "Urzędnik" || currentUser.role === "Minister" || currentUser.role === "Administrator" || currentUser.role === "Król");
-
         document.getElementById('nav-login').classList.toggle('hidden', isLoggedIn);
         document.getElementById('nav-logout').classList.toggle('hidden', !isLoggedIn);
         document.getElementById('nav-apps').classList.toggle('hidden', !isLoggedIn);
         document.getElementById('nav-profile').classList.toggle('hidden', !isLoggedIn);
-        document.getElementById('nav-admin').classList.toggle('hidden', !isAdmin);
 
         if(isLoggedIn) {
             document.getElementById('prof-nick').textContent = currentUser.nick;
@@ -395,17 +377,36 @@
         }
     }
 
-    // --- USŁUGI (WNIOSKI) ---
+    // --- SYSTEM LOGOWANIA ADMINA (JAK W TCP) ---
+    window.loginAdmin = function() {
+        const pass = document.getElementById('admin-pass').value;
+        const msgDiv = document.getElementById('admin-msg');
+        
+        // TUTAJ JEST HASŁO ADMINA
+        if (pass === "POLANDRIA_ADMIN") {
+            document.getElementById('admin-login-box').classList.add('hidden');
+            document.getElementById('admin-panel-content').classList.remove('hidden');
+            loadAdminData();
+        } else {
+            msgDiv.textContent = "Błędne hasło urzędnika!";
+        }
+    }
+
+    window.logoutAdmin = function() {
+        document.getElementById('admin-panel-content').classList.add('hidden');
+        document.getElementById('admin-login-box').classList.remove('hidden');
+        document.getElementById('admin-pass').value = '';
+        navigate('home');
+    }
+
+    // --- WNIOSKI ---
     function renderServices() {
         const container = document.getElementById('services-list');
         let html = '';
         applicationTypes.forEach(cat => {
             html += `<h3 style="margin-top:20px; color:var(--primary);">${cat.cat}</h3>`;
             cat.items.forEach(item => {
-                html += `<div class="service-item">
-                    <span>${item}</span>
-                    <button class="btn btn-primary btn-sm" onclick="goToApp('${item}', '${cat.cat}')">Złóż wniosek</button>
-                </div>`;
+                html += `<div class="service-item"><span>${item}</span><button class="btn btn-primary btn-sm" onclick="goToApp('${item}', '${cat.cat}')">Złóż wniosek</button></div>`;
             });
         });
         container.innerHTML = html;
@@ -413,68 +414,31 @@
 
     window.goToApp = function(type, cat) {
         if(!currentUser) return navigate('login');
-        if(confirm(`Czy na pewno chcesz złożyć wniosek: "${type}"?`)) {
-            submitApplication(type, cat);
-        }
+        if(confirm(`Czy na pewno chcesz złożyć wniosek: "${type}"?`)) submitApplication(type, cat);
     }
 
     async function submitApplication(type, cat) {
         try {
             await addDoc(collection(db, "applications"), {
-                applicantNick: currentUser.nick,
-                applicantUid: currentUser.uid,
-                type: type,
-                category: cat,
-                status: "Oczekuje na rozpatrzenie",
-                createdAt: serverTimestamp()
+                applicantNick: currentUser.nick, applicantUid: currentUser.uid,
+                type: type, category: cat, status: "Oczekuje na rozpatrzenie", createdAt: serverTimestamp()
             });
-            alert("Wniosek złożony pomyślnie!");
-            navigate('my-apps');
+            alert("Wniosek złożony pomyślnie!"); navigate('my-apps');
         } catch(e) { alert("Błąd: "+e.message); }
     }
 
-    // --- MOJE WNIOSKI ---
     function renderMyApps() {
         if(!currentUser) return;
         const container = document.getElementById('my-apps-list');
         container.innerHTML = '<p class="empty-state">Ładowanie...</p>';
-
         const q = query(collection(db, "applications"), where("applicantNick", "==", currentUser.nick), orderBy("createdAt", "desc"));
         onSnapshot(q, (snapshot) => {
             if(snapshot.empty) { container.innerHTML = '<p class="empty-state">Nie złożyłeś jeszcze żadnych wniosków.</p>'; return; }
             let html = '';
             snapshot.forEach(doc => {
-                const d = doc.data();
-                let time = d.createdAt ? d.createdAt.toDate().toLocaleString('pl-PL') : '';
-                let badgeClass = 'badge-pending';
-                if(d.status.includes('traku')) badgeClass = 'badge-processing';
-                if(d.status.includes('Zaakcept')) badgeClass = 'badge-accepted';
-                if(d.status.includes('Odrzu')) badgeClass = 'badge-rejected';
-                
-                html += `<div class="service-item" style="flex-direction: column; align-items: flex-start; gap: 10px;">
-                    <div style="display:flex; justify-content:space-between; width:100%;">
-                        <strong>${d.type} <span style="font-size:0.8rem; color:var(--text-muted);">(${d.category})</span></strong>
-                        <span class="badge ${badgeClass}">${d.status}</span>
-                    </div>
-                    <small style="color:var(--text-muted);">Złożono: ${time}</small>
-                </div>`;
-            });
-            container.innerHTML = html;
-        });
-    }
-
-    // --- POWIADOMIENIA ---
-    window.renderNotifications = async function() {
-        if(!currentUser) return;
-        const container = document.getElementById('notif-list');
-        const q = query(collection(db, "notifications"), where("targetNick", "==", currentUser.nick), orderBy("createdAt", "desc"));
-        onSnapshot(q, (snapshot) => {
-            if(snapshot.empty) { container.innerHTML = '<p class="empty-state">Brak powiadomień.</p>'; return; }
-            let html = '';
-            snapshot.forEach(doc => {
-                const d = doc.data();
-                let time = d.createdAt ? d.createdAt.toDate().toLocaleString('pl-PL') : '';
-                html += `<div class="alert alert-info"><strong>[${time}]</strong> ${d.message}</div>`;
+                const d = doc.data(); let time = d.createdAt ? d.createdAt.toDate().toLocaleString('pl-PL') : '';
+                let bc = 'badge-pending'; if(d.status.includes('traku')) bc = 'badge-processing'; if(d.status.includes('Zaakcept')) bc = 'badge-accepted'; if(d.status.includes('Odrzu')) bc = 'badge-rejected';
+                html += `<div class="service-item" style="flex-direction:column; align-items:flex-start; gap:10px;"><div style="display:flex; justify-content:space-between; width:100%;"><strong>${d.type} <span style="font-size:0.8rem;color:var(--text-muted);">(${d.category})</span></strong><span class="badge ${bc}">${d.status}</span></div><small style="color:var(--text-muted);">Złożono: ${time}</small></div>`;
             });
             container.innerHTML = html;
         });
@@ -484,46 +448,25 @@
     window.switchAdminTab = function(tabId) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         event.target.classList.add('active');
-        ['admin-apps', 'admin-citizens', 'admin-stats'].forEach(id => {
-            document.getElementById(id).classList.toggle('hidden', id !== tabId);
-        });
+        ['admin-apps', 'admin-citizens', 'admin-stats'].forEach(id => document.getElementById(id).classList.toggle('hidden', id !== tabId));
         if(tabId === 'admin-stats') loadAdminData();
         if(tabId === 'admin-citizens') loadCitizens();
     }
 
     function loadAdminData() {
-        // Wnioski
         const q = query(collection(db, "applications"), orderBy("createdAt", "desc"));
         onSnapshot(q, (snapshot) => {
             document.getElementById('stat-apps').textContent = snapshot.size;
             document.getElementById('stat-apps-2').textContent = snapshot.size;
-            
             const container = document.getElementById('admin-apps-list');
-            if(snapshot.empty) { container.innerHTML = '<p class="empty-state">Brak wniosków w systemie.</p>'; return; }
-            
+            if(snapshot.empty) { container.innerHTML = '<p class="empty-state">Brak wniosków.</p>'; return; }
             let html = '';
             snapshot.forEach(doc => {
-                const d = doc.data();
-                let time = d.createdAt ? d.createdAt.toDate().toLocaleString('pl-PL') : '';
-                html += `<div class="service-item" style="flex-direction:column; align-items:flex-start; gap:10px;">
-                    <div style="width:100%; display:flex; justify-content:space-between;">
-                        <div>
-                            <strong>${d.type}</strong> <span style="color:var(--text-muted)">- ${d.applicantNick} (${d.applicantUid})</span>
-                        </div>
-                        <span class="badge badge-pending">${d.status}</span>
-                    </div>
-                    <small style="color:var(--text-muted)">Kategoria: ${d.category} | Złożono: ${time}</small>
-                    <div style="display:flex; gap:5px; margin-top:5px;">
-                        <button class="btn btn-success btn-sm" onclick="changeStatus('${doc.id}', 'Zaakceptowany')">Akceptuj</button>
-                        <button class="btn btn-warning btn-sm" onclick="changeStatus('${doc.id}', 'W trakcie realizacji')">W realizacji</button>
-                        <button class="btn btn-danger btn-sm" onclick="changeStatus('${doc.id}', 'Odrzucony')">Odrzuć</button>
-                    </div>
-                </div>`;
+                const d = doc.data(); let time = d.createdAt ? d.createdAt.toDate().toLocaleString('pl-PL') : '';
+                html += `<div class="service-item" style="flex-direction:column; align-items:flex-start; gap:10px;"><div style="width:100%;display:flex;justify-content:space-between;"><div><strong>${d.type}</strong> <span style="color:var(--text-muted)">- ${d.applicantNick} (${d.applicantUid})</span></div><span class="badge badge-pending">${d.status}</span></div><small style="color:var(--text-muted)">Kategoria: ${d.category} | Złożono: ${time}</small><div style="display:flex;gap:5px;margin-top:5px;"><button class="btn btn-success btn-sm" onclick="changeStatus('${doc.id}', 'Zaakceptowany')">Akceptuj</button><button class="btn btn-warning btn-sm" onclick="changeStatus('${doc.id}', 'W trakcie realizacji')">W realizacji</button><button class="btn btn-danger btn-sm" onclick="changeStatus('${doc.id}', 'Odrzucony')">Odrzuć</button></div></div>`;
             });
             container.innerHTML = html;
         });
-
-        // Mieszkańcy do statystyk
         onSnapshot(collection(db, "citizens"), (snapshot) => {
             document.getElementById('stat-citizens').textContent = snapshot.size;
             document.getElementById('stat-citizens-2').textContent = snapshot.size;
@@ -532,9 +475,7 @@
 
     function loadCitizens() {
         onSnapshot(collection(db, "citizens"), (snapshot) => {
-            allCitizens = [];
-            snapshot.forEach(doc => allCitizens.push(doc.data()));
-            filterCitizens();
+            allCitizens = []; snapshot.forEach(doc => allCitizens.push(doc.data())); filterCitizens();
         });
     }
 
@@ -542,50 +483,20 @@
         const search = document.getElementById('search-citizen').value.toLowerCase();
         const filtered = allCitizens.filter(c => c.nick.toLowerCase().includes(search));
         const container = document.getElementById('citizens-list');
-        if(filtered.length === 0) { container.innerHTML = '<p class="empty-state">Nie znaleziono mieszkańców.</p>'; return; }
-        
+        if(filtered.length === 0) { container.innerHTML = '<p class="empty-state">Brak.</p>'; return; }
         let html = '';
         filtered.forEach(c => {
-            html += `<div class="service-item">
-                <div>
-                    <strong>${c.nick}</strong> <span style="color:var(--text-muted); font-size:0.8rem;">(${c.uid})</span>
-                    <div style="font-size:0.8rem; margin-top:5px;">Rola: ${c.role} | Status: ${c.status}</div>
-                </div>
-                <div style="display:flex; gap:5px; flex-direction:column; align-items:flex-end;">
-                    <select onchange="changeRole('${c.uid}', this.value)" style="width: 150px; padding: 5px; font-size: 0.8rem;">
-                        ${['Mieszkaniec', 'Obywatel', 'Przedsiębiorca', 'Urzędnik', 'Minister', 'Sędzia', 'Administrator', 'Król'].map(r => `<option value="${r}" ${c.role===r?'selected':''}>${r}</option>`).join('')}
-                    </select>
-                    <button class="btn btn-success btn-sm" onclick="grantCitizenship('${c.uid}')">Daj Obywatelstwo</button>
-                </div>
-            </div>`;
+            html += `<div class="service-item"><div><strong>${c.nick}</strong> <span style="color:var(--text-muted);font-size:0.8rem;">(${c.uid})</span><div style="font-size:0.8rem;margin-top:5px;">Rola: ${c.role} | Status: ${c.status}</div></div><div style="display:flex;gap:5px;flex-direction:column;align-items:flex-end;"><select onchange="changeRole('${c.uid}', this.value)" style="width:150px;padding:5px;font-size:0.8rem;">${['Mieszkaniec','Obywatel','Przedsiębiorca','Urzędnik','Minister','Sędzia','Administrator','Król'].map(r=>`<option value="${r}" ${c.role===r?'selected':''}>${r}</option>`).join('')}</select><button class="btn btn-success btn-sm" onclick="grantCitizenship('${c.uid}')">Daj Obywatelstwo</button></div></div>`;
         });
         container.innerHTML = html;
     }
 
-    window.changeStatus = async function(docId, newStatus) {
-        try {
-            await updateDoc(doc(db, "applications", docId), { status: newStatus });
-            // Tutaj można by dodać wysyłanie powiadomienia do użytkownika
-        } catch(e) { alert("Błąd zmiany statusu: "+e.message); }
-    }
+    window.changeStatus = async function(docId, newStatus) { try { await updateDoc(doc(db, "applications", docId), { status: newStatus }); } catch(e) { alert("Błąd: "+e.message); } }
+    window.changeRole = async function(uid, newRole) { try { await updateDoc(doc(db, "citizens", uid), { role: newRole }); } catch(e) { alert("Błąd: "+e.message); } }
+    window.grantCitizenship = async function(uid) { try { await updateDoc(doc(db, "citizens", uid), { status: "Obywatel Polandrii" }); } catch(e) { alert("Błąd: "+e.message); } }
 
-    window.changeRole = async function(uid, newRole) {
-        try {
-            await updateDoc(doc(db, "citizens", uid), { role: newRole });
-            if(currentUser.uid === uid) { currentUser.role = newRole; setupUI(); }
-        } catch(e) { alert("Błąd zmiany roli: "+e.message); }
-    }
-
-    window.grantCitizenship = async function(uid) {
-        try {
-            await updateDoc(doc(db, "citizens", uid), { status: "Obywatel Polandrii" });
-        } catch(e) { alert("Błąd: "+e.message); }
-    }
-
-    // INICJALIZACJA
     setupUI();
     navigate('home');
-
 </script>
 </body>
 </html>
