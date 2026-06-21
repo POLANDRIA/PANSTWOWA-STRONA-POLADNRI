@@ -51,6 +51,8 @@
         .tab-btn { background: none; border: none; padding: 10px 15px; cursor: pointer; font-weight: 600; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; }
         .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
         .data-box { background: #f8fafc; padding: 10px; border-radius: 4px; margin: 5px 0; font-size: 0.9rem; color: var(--text-muted); }
+        .admin-citizen-controls { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-top: 10px; }
+        .admin-citizen-controls div { flex: 1; min-width: 150px; }
         footer { background: var(--bg-dark); color: var(--white); text-align: center; padding: 20px; margin-top: 40px; font-size: 0.85rem; }
     </style>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://firestore.googleapis.com https://*.googleapis.com https://www.gstatic.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://www.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:;">
@@ -86,7 +88,6 @@
 
     <div class="container">
         
-        <!-- STRONA GŁÓWNA -->
         <div id="page-home" class="page">
             <div class="alert"><strong>„Wszystkie sprawy państwowe w jednym miejscu.”</strong><br>Witaj na portalu cyfrowym Państwa Polandria.</div>
             <div class="stats-grid">
@@ -100,7 +101,6 @@
             </div>
         </div>
 
-        <!-- LOGOWANIE -->
         <div id="page-login" class="page hidden">
             <div class="card" style="max-width: 500px; margin: 0 auto;">
                 <h2>Logowanie Mieszkańca</h2>
@@ -111,12 +111,10 @@
             </div>
         </div>
 
-        <!-- LISTA USŁUG -->
         <div id="page-services" class="page hidden">
             <div class="card"><h2>Wybierz usługę</h2><div id="services-list"></div></div>
         </div>
 
-        <!-- FORMULARZ WNIOSKU (NOWE PODEJŚCIE) -->
         <div id="page-app-form" class="page hidden">
             <div class="card" style="max-width: 600px; margin: 0 auto;">
                 <h2 id="form-title">Wypełnij wniosek</h2>
@@ -128,12 +126,10 @@
             </div>
         </div>
 
-        <!-- MOJE WNIOSKI -->
         <div id="page-my-apps" class="page hidden">
             <div class="card"><h2>Moje złożone wnioski</h2><div id="my-apps-list"></div></div>
         </div>
 
-        <!-- PROFIL -->
         <div id="page-profile" class="page hidden">
             <div class="card">
                 <h2>Dane Mieszkańca</h2>
@@ -145,7 +141,6 @@
             </div>
         </div>
 
-        <!-- PANEL URZĘDNIKA -->
         <div id="page-admin" class="page hidden">
             <div id="admin-login-box" class="card" style="max-width: 500px; margin: 0 auto;">
                 <h2>Panel Urzędnika</h2>
@@ -160,14 +155,13 @@
                     <button class="tab-btn" onclick="switchAdminTab('tab-citizens')">Mieszkańcy</button>
                     <button class="tab-btn" onclick="switchAdminTab('tab-fines')">Mandaty</button>
                     <button class="tab-btn" onclick="switchAdminTab('tab-laws')">Ustawy</button>
-                    <button class="tab-btn" onclick="switchAdminTab('tab-stats')">Statystyki</button>
                 </div>
 
                 <div id="tab-apps" class="card"><h3>System Wniosków</h3><div id="admin-apps-list"></div></div>
                 
                 <div id="tab-citizens" class="card hidden">
-                    <h3>Rejestr</h3>
-                    <input type="text" id="search-citizen" placeholder="Szukaj..." oninput="filterCitizens()" style="margin-bottom:15px;">
+                    <h3>Zarządzanie Mieszkańcami i Obywatelstwem</h3>
+                    <input type="text" id="search-citizen" placeholder="Szukaj po nicku..." oninput="filterCitizens()" style="margin-bottom:15px;">
                     <div id="citizens-list"></div>
                 </div>
 
@@ -189,15 +183,6 @@
                     <div class="form-group"><label>Treść Ustawy</label><textarea id="law-content" rows="4"></textarea></div>
                     <button class="btn btn-primary" onclick="publishLaw()">Opublikuj Ustawę</button>
                 </div>
-
-                <div id="tab-stats" class="card hidden">
-                    <h3>Statystyki</h3>
-                    <div class="stats-grid">
-                        <div class="stat-box"><h4 id="s-cit">0</h4><p>Mieszkańców</p></div>
-                        <div class="stat-box"><h4 id="s-comp">0</h4><p>Firm</p></div>
-                        <div class="stat-box"><h4 id="s-apps">0</h4><p>Wniosków</p></div>
-                    </div>
-                </div>
                 
                 <button class="btn btn-danger" style="margin-top: 20px;" onclick="logoutAdmin()">Wyloguj</button>
             </div>
@@ -218,7 +203,6 @@
     let allCitizens = [];
     let currentFormType = null;
 
-    // DEFINICJA WNIOSKÓW (prosta, czytelna struktura)
     const appTypes = [
         { id: 'obywatelstwo', name: 'Wniosek o obywatelstwo', cat: 'Obywatelskie', fields: [] },
         { id: 'dowod', name: 'Wniosek o wydanie dowodu', cat: 'Obywatelskie', fields: [] },
@@ -234,7 +218,6 @@
         { id: 'zgloszenie', name: 'Zgłoszenie naruszenia prawa', cat: 'Porządkowe', fields: ['Opis naruszenia'] }
     ];
 
-    // --- NAWIGACJA ---
     window.navigate = function(pageId) {
         document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
         document.getElementById('page-' + pageId).classList.remove('hidden');
@@ -246,7 +229,6 @@
         if(pageId === 'admin') loadAdminApps();
     }
 
-    // --- LOGOWANIE MIESZKAŃCA ---
     window.handleLogin = async function() {
         const nick = document.getElementById('login-nick').value.trim();
         const pass = document.getElementById('login-pass').value;
@@ -267,7 +249,6 @@
         } catch (e) { document.getElementById('login-msg').textContent = "Błąd bazy: " + e.message; }
     }
     window.logout = function() { currentUser = null; setupUI(); navigate('home'); }
-    
     function setupUI() {
         const isLogged = !!currentUser;
         document.getElementById('nav-login').classList.toggle('hidden', isLogged);
@@ -276,7 +257,7 @@
         document.getElementById('nav-profile').classList.toggle('hidden', !isLogged);
     }
 
-    // --- SYSTEM WNIOSKÓW (NOWY) ---
+    // --- NAPRAWIONY SYSTEM WNIOSKÓW ---
     function renderServices() {
         const c = document.getElementById('services-list'); let h = '';
         appTypes.forEach(app => {
@@ -296,7 +277,8 @@
             fieldsHtml = '<p style="color:var(--text-muted); margin-bottom:20px;">Ten wniosek nie wymaga dodatkowych danych.</p>';
         } else {
             app.fields.forEach((f, index) => {
-                fieldsHtml += `<div class="form-group"><label>${f}</label><input type="text" id="dyn-field-${index}"></div>`;
+                // Używamy atrybutu data-label, aby uniknąć błędów z polskimi znakami w ID
+                fieldsHtml += `<div class="form-group"><label>${f}</label><input type="text" id="dyn-field-${index}" data-label="${f}"></div>`;
             });
         }
         document.getElementById('form-fields').innerHTML = fieldsHtml;
@@ -306,8 +288,11 @@
     window.submitFormApp = async function() {
         let details = {};
         if(currentFormType.fields.length > 0) {
-            currentFormType.fields.forEach((f, index) => {
-                details[f] = document.getElementById('dyn-field-' + index).value.trim();
+            const inputs = document.querySelectorAll('#form-fields input[data-label]');
+            inputs.forEach(input => {
+                const label = input.getAttribute('data-label');
+                const value = input.value.trim();
+                if(value) details[label] = value;
             });
         }
 
@@ -328,129 +313,77 @@
         }
     }
 
-    // --- MOJE WNIOSKI (CZYSTA REAKTYWNOŚĆ) ---
     function loadMyApps() {
         if(!currentUser) return;
         const c = document.getElementById('my-apps-list');
         c.innerHTML = 'Ładowanie...';
-        
         const q = query(collection(db, "applications"), where("applicantUid", "==", currentUser.uid), orderBy("createdAt", "desc"));
         onSnapshot(q, (snapshot) => {
             if(snapshot.empty) { c.innerHTML = 'Nie złożyłeś jeszcze żadnych wniosków.'; return; }
-            
             let html = '';
             snapshot.forEach(d => {
                 const data = d.data();
                 let time = data.createdAt ? data.createdAt.toDate().toLocaleString('pl-PL') : '';
-                let bc = 'badge-pending'; 
-                if(data.status.includes('Zaakcept')) bc = 'badge-accepted'; 
-                if(data.status.includes('Odrzu')) bc = 'badge-rejected';
-
+                let bc = 'badge-pending'; if(data.status.includes('Zaakcept')) bc = 'badge-accepted'; if(data.status.includes('Odrzu')) bc = 'badge-rejected';
                 let detHtml = '';
-                if(data.details) {
-                    for (const [key, value] of Object.entries(data.details)) {
-                        if(value) detHtml += `<strong>${key}:</strong> ${value}<br>`;
-                    }
-                }
-
-                html += `<div class="service-item" style="flex-direction:column; align-items:flex-start;">
-                    <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:5px;">
-                        <strong>${data.type}</strong> <span class="badge ${bc}">${data.status}</span>
-                    </div>
-                    <small style="color:var(--text-muted)">Złożono: ${time}</small>
-                    ${detHtml ? `<div class="data-box">${detHtml}</div>` : ''}
-                </div>`;
+                if(data.details) { for (const [key, value] of Object.entries(data.details)) { if(value) detHtml += `<strong>${key}:</strong> ${value}<br>`; } }
+                html += `<div class="service-item" style="flex-direction:column; align-items:flex-start;"><div style="display:flex; justify-content:space-between; width:100%; margin-bottom:5px;"><strong>${data.type}</strong> <span class="badge ${bc}">${data.status}</span></div><small style="color:var(--text-muted)">Złożono: ${time}</small>${detHtml ? `<div class="data-box">${detHtml}</div>` : ''}</div>`;
             });
             c.innerHTML = html;
         });
     }
 
-    // --- PROFIL I MANDATY ---
     function loadProfile() {
         if(!currentUser) return;
         document.getElementById('prof-nick').textContent = currentUser.nick;
         document.getElementById('prof-id').textContent = currentUser.uid;
         document.getElementById('prof-status').textContent = currentUser.status;
-
         const c = document.getElementById('my-fines-list');
         onSnapshot(query(collection(db, "fines"), where("citizenNick", "==", currentUser.nick)), (snap) => {
             const active = snap.docs.filter(d => d.data().status === 'Aktywny');
             if(active.length === 0) { c.innerHTML = 'Brak aktywnych mandatów.'; return; }
-            let h = '';
-            active.forEach(d => {
-                const f = d.data();
-                h += `<div class="fine-item"><strong>ID: ${d.id}</strong> - ${f.reason} [<span style="color:var(--danger)">${f.amount} PLN</span>]</div>`;
-            });
-            c.innerHTML = h;
+            let h = ''; active.forEach(d => { const f = d.data(); h += `<div class="fine-item"><strong>ID: ${d.id}</strong> - ${f.reason} [<span style="color:var(--danger)">${f.amount} PLN</span>]</div>`; }); c.innerHTML = h;
         });
     }
 
     // --- PANEL URZĘDNIKA ---
-    window.loginAdmin = function() { 
-        if(document.getElementById('admin-pass').value === "POLANDRIA_ADMIN") { 
-            document.getElementById('admin-login-box').classList.add('hidden'); 
-            document.getElementById('admin-panel-content').classList.remove('hidden'); 
-            loadAdminApps(); loadAdminLaws();
-        } else document.getElementById('admin-msg').textContent = "Błędne hasło!"; 
-    }
+    window.loginAdmin = function() { if(document.getElementById('admin-pass').value === "POLANDRIA_ADMIN") { document.getElementById('admin-login-box').classList.add('hidden'); document.getElementById('admin-panel-content').classList.remove('hidden'); loadAdminApps(); loadAdminLaws(); } else document.getElementById('admin-msg').textContent = "Błędne hasło!"; }
     window.logoutAdmin = function() { document.getElementById('admin-panel-content').classList.add('hidden'); document.getElementById('admin-login-box').classList.remove('hidden'); navigate('home'); }
     
     window.switchAdminTab = function(tabId) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); event.target.classList.add('active');
-        ['tab-apps', 'tab-citizens', 'tab-fines', 'tab-laws', 'tab-stats'].forEach(id => document.getElementById(id).classList.toggle('hidden', id !== tabId));
+        ['tab-apps', 'tab-citizens', 'tab-fines', 'tab-laws'].forEach(id => document.getElementById(id).classList.toggle('hidden', id !== tabId));
         if(tabId === 'tab-apps') loadAdminApps();
         if(tabId === 'tab-citizens') loadCitizens();
         if(tabId === 'tab-fines') loadFines();
-        if(tabId === 'tab-stats') loadStats();
     }
 
     function loadAdminApps() {
-        const c = document.getElementById('admin-apps-list');
-        c.innerHTML = 'Ładowanie wniosków...';
+        const c = document.getElementById('admin-apps-list'); c.innerHTML = 'Ładowanie wniosków...';
         onSnapshot(query(collection(db, "applications"), orderBy("createdAt", "desc")), (snap) => {
             if(snap.empty) { c.innerHTML = 'Brak wniosków w systemie.'; return; }
             let h = '';
             snap.forEach(d => {
-                const data = d.data();
-                let time = data.createdAt ? data.createdAt.toDate().toLocaleString('pl-PL') : '';
-                let detHtml = '';
-                if(data.details) { for (const [key, value] of Object.entries(data.details)) { if(value) detHtml += `${key}: ${value} | `; } }
-
-                h += `<div class="service-item" style="flex-direction:column; align-items:flex-start;">
-                    <div style="width:100%;display:flex;justify-content:space-between; margin-bottom:5px;">
-                        <strong>${data.type}</strong> <span class="badge badge-pending">${data.status}</span>
-                    </div>
-                    <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:5px;">
-                        Obywatel: <strong>${data.applicantNick}</strong> (${data.applicantUid}) | ${time} <br>
-                        ${detHtml}
-                    </div>
-                    <div style="display:flex;gap:5px; flex-wrap:wrap;">
-                        <button class="btn btn-success btn-sm" onclick="updateAppStatus('${d.id}', 'Zaakceptowany')">Akceptuj</button>
-                        <button class="btn btn-warning btn-sm" onclick="updateAppStatus('${d.id}', 'W trakcie realizacji')">W realizacji</button>
-                        <button class="btn btn-danger btn-sm" onclick="updateAppStatus('${d.id}', 'Odrzucony')">Odrzuć</button>
-                        <button class="btn btn-sm" style="background:#333; color:white;" onclick="deleteAppPermanently('${d.id}')">USUŃ TRWALE Z BAZY</button>
-                    </div>
-                </div>`;
+                const data = d.data(); let time = data.createdAt ? data.createdAt.toDate().toLocaleString('pl-PL') : '';
+                let detHtml = ''; if(data.details) { for (const [key, value] of Object.entries(data.details)) { if(value) detHtml += `${key}: ${value} | `; } }
+                h += `<div class="service-item" style="flex-direction:column; align-items:flex-start;"><div style="width:100%;display:flex;justify-content:space-between; margin-bottom:5px;"><strong>${data.type}</strong> <span class="badge badge-pending">${data.status}</span></div><div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:5px;">Obywatel: <strong>${data.applicantNick}</strong> | ${time} <br>${detHtml}</div><div style="display:flex;gap:5px; flex-wrap:wrap;"><button class="btn btn-success btn-sm" onclick="updateAppStatus('${d.id}', 'Zaakceptowany')">Akceptuj</button><button class="btn btn-warning btn-sm" onclick="updateAppStatus('${d.id}', 'W trakcie realizacji')">W realizacji</button><button class="btn btn-danger btn-sm" onclick="updateAppStatus('${d.id}', 'Odrzucony')">Odrzuć</button><button class="btn btn-sm" style="background:#333; color:white;" onclick="deleteAppPermanently('${d.id}')">USUŃ TRWALE</button></div></div>`;
             });
             c.innerHTML = h;
         });
     }
 
     window.updateAppStatus = async function(id, status) { try { await updateDoc(doc(db, "applications", id), { status }); } catch(e) { alert("Błąd: "+e.message); } }
-    
     window.deleteAppPermanently = async function(id) {
-        if(confirm("Na pewno chcesz bezpowrotnie usunąć ten wniosek z bazy danych? Obywatel przestanie go widzieć!")) {
-            try { 
-                await deleteDoc(doc(db, "applications", id)); 
-                // Nie odświeżamy ręcznie, onSnapshot zrobi to sam!
-            } catch(e) { alert("Błąd usuwania: "+e.message); }
+        if(confirm("Na pewno usunąć ten wniosek bezpowrotnie z bazy?")) {
+            try { await deleteDoc(doc(db, "applications", id)); } catch(e) { alert("Błąd usuwania: "+e.message); }
         }
     }
 
-    // --- URZĘDNIK: MIESZKAŃCY ---
+    // --- URZĘDNIK: MIESZKAŃCY I OBYWATELSTWA (LISTA + POLE TEKSTOWE) ---
     function loadCitizens() {
         onSnapshot(collection(db, "citizens"), (snap) => { allCitizens = []; snap.forEach(d => allCitizens.push({id: d.id, ...d.data()})); filterCitizens(); });
     }
+    
     window.filterCitizens = function() {
         const s = document.getElementById('search-citizen').value.toLowerCase();
         const f = allCitizens.filter(c => c.nick.toLowerCase().includes(s));
@@ -458,11 +391,52 @@
         if(f.length === 0) { c.innerHTML = 'Brak wyników.'; return; }
         let h = '';
         f.forEach(c => {
-            h += `<div class="service-item"><div><strong>${c.nick}</strong> (${c.id})<br><small>Status: ${c.status}</small></div><button class="btn btn-success btn-sm" onclick="grantCitizenship('${c.id}')">Daj Obywatelstwo</button></div>`;
+            // Sprawdzamy czy obecny status jest na standardowej liście
+            const isStandard = ['Oczekuje', 'Obywatel Polandrii', 'Zablokowany'].includes(c.status);
+            
+            h += `<div class="service-item" style="flex-direction:column; align-items:flex-start;">
+                <div><strong>${c.nick}</strong> (${c.id})<br><small>Aktualny status: ${c.status}</small></div>
+                
+                <div class="admin-citizen-controls">
+                    <div>
+                        <label style="font-size:0.8rem;">Wybierz status:</label>
+                        <select id="sel-${c.id}" onchange="toggleCustomCitizenship('${c.id}', this.value)">
+                            <option value="Oczekuje" ${c.status==='Oczekuje' ? 'selected' : ''}>Oczekuje</option>
+                            <option value="Obywatel Polandrii" ${c.status==='Obywatel Polandrii' ? 'selected' : ''}>Obywatel Polandrii</option>
+                            <option value="Zablokowany" ${c.status==='Zablokowany' ? 'selected' : ''}>Zablokowany</option>
+                            <option value="custom" ${!isStandard ? 'selected' : ''}>Inne obywatelstwo...</option>
+                        </select>
+                    </div>
+                    
+                    <div id="custom-wrap-${c.id}" class="${!isStandard ? '' : 'hidden'}">
+                        <label style="font-size:0.8rem;">Wpisz status:</label>
+                        <input type="text" id="custom-${c.id}" placeholder="np. Obywatel Pakovi" value="${!isStandard ? c.status : ''}">
+                    </div>
+                    
+                    <div style="display:flex; align-items:flex-end;">
+                        <button class="btn btn-success btn-sm" onclick="saveCitizenStatus('${c.id}')">Zmień status</button>
+                    </div>
+                </div>
+            </div>`;
         });
         c.innerHTML = h;
     }
-    window.grantCitizenship = async function(id) { try { await updateDoc(doc(db, "citizens", id), { status: "Obywatel Polandrii" }); } catch(e) { alert("Błąd: "+e.message); } }
+
+    window.toggleCustomCitizenship = function(uid, val) {
+        document.getElementById('custom-wrap-' + uid).classList.toggle('hidden', val !== 'custom');
+    }
+
+    window.saveCitizenStatus = async function(uid) {
+        const selectVal = document.getElementById('sel-' + uid).value;
+        const customVal = document.getElementById('custom-' + uid).value.trim();
+        const finalStatus = selectVal === 'custom' ? customVal : selectVal;
+        
+        if(!finalStatus) return alert("Wybierz status z listy lub wpisz go w polu!");
+        
+        try {
+            await updateDoc(doc(db, "citizens", uid), { status: finalStatus });
+        } catch(e) { alert("Błąd: "+e.message); }
+    }
 
     // --- URZĘDNIK: MANDATY ---
     window.issueFine = async function() {
@@ -481,12 +455,8 @@
             if(snap.empty) { c.innerHTML = 'Brak mandatów.'; return; }
             let h = '';
             snap.forEach(d => {
-                const f = d.data();
-                let style = f.status === 'Aktywny' ? 'fine-item' : 'data-box';
-                h += `<div class="${style}" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div><strong>${f.citizenNick}</strong> - ${f.reason} <br><small>ID: ${d.id} | Status: ${f.status}</small></div>
-                    ${f.status === 'Aktywny' ? `<button class="btn btn-warning btn-sm" onclick="cancelFine('${d.id}')">Anuluj</button>` : ''}
-                </div>`;
+                const f = d.data(); let style = f.status === 'Aktywny' ? 'fine-item' : 'data-box';
+                h += `<div class="${style}" style="display:flex; justify-content:space-between; align-items:center;"><div><strong>${f.citizenNick}</strong> - ${f.reason} <br><small>ID: ${d.id} | Status: ${f.status}</small></div>${f.status === 'Aktywny' ? `<button class="btn btn-warning btn-sm" onclick="cancelFine('${d.id}')">Anuluj</button>` : ''}</div>`;
             });
             c.innerHTML = h;
         });
@@ -505,41 +475,25 @@
         } catch(e) { alert("Błąd: "+e.message); }
     }
 
-    function loadAdminLaws() {
-        onSnapshot(collection(db, "laws"), () => { loadHomeLaws(); }); // Odświeża listę na głównej
-    }
-
+    function loadAdminLaws() { onSnapshot(collection(db, "laws"), () => { loadHomeLaws(); }); }
     function loadHomeLaws() {
         const c = document.getElementById('home-laws-list');
         onSnapshot(query(collection(db, "laws"), orderBy("createdAt", "desc")), (snap) => {
             if(snap.empty) { c.innerHTML = 'Brak ustaw w systemie.'; return; }
             let h = '';
-            snap.forEach(d => {
-                const l = d.data();
-                h += `<div class="data-box" style="margin-bottom:10px; border-left: 4px solid var(--accent);"><strong style="color:var(--primary);">${l.title}</strong><br>${l.content}</div>`;
-            });
+            snap.forEach(d => { const l = d.data(); h += `<div class="data-box" style="margin-bottom:10px; border-left: 4px solid var(--accent);"><strong style="color:var(--primary);">${l.title}</strong><br>${l.content}</div>`; });
             c.innerHTML = h;
         });
     }
 
-    // --- STATYSTYKI (Z LICZENIEM FIRM) ---
-    function loadStats() {
-        onSnapshot(collection(db, "citizens"), (snap) => { document.getElementById('s-cit').textContent = snap.size; });
-        onSnapshot(collection(db, "applications"), (snap) => { 
-            document.getElementById('s-apps').textContent = snap.size;
-            document.getElementById('stat-apps').textContent = snap.size;
-            // Zlicza tylko zaakceptowane firmy!
-            const companies = snap.docs.filter(d => d.data().type === 'Rejestracja firmy' && d.data().status === 'Zaakceptowany').length;
-            document.getElementById('s-comp').textContent = companies;
-            document.getElementById('stat-companies').textContent = companies;
-        });
-    }
+    // --- STATYSTYKI LIVE ---
+    onSnapshot(collection(db, "citizens"), (snap) => { document.getElementById('stat-citizens').textContent = snap.size; });
+    onSnapshot(collection(db, "applications"), (snap) => { 
+        document.getElementById('stat-apps').textContent = snap.size;
+        document.getElementById('stat-companies').textContent = snap.docs.filter(d => d.data().type === 'Rejestracja firmy' && d.data().status === 'Zaakceptowany').length;
+    });
 
-    // INICJALIZACJA
-    setupUI();
-    loadHomeLaws();
-    navigate('home');
-
+    setupUI(); loadHomeLaws(); navigate('home');
 </script>
 </body>
 </html>
